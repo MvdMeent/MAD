@@ -1,0 +1,349 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     11067,        340]
+NotebookOptionsPosition[      8684,        262]
+NotebookOutlinePosition[      9051,        278]
+CellTagsIndexPosition[      9008,        275]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Contexts and Packages", "Title",
+ CellChangeTimes->{{3.6234847744988346`*^9, 3.623484788907834*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Contexts", "Section",
+ CellChangeTimes->{{3.6234847952158346`*^9, 3.6234848023378344`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Overview", "Subsection",
+ CellChangeTimes->{{3.6234886127728343`*^9, 3.6234886193408346`*^9}}],
+
+Cell["\<\
+Object names in Mathematica generally have the form \
+\[OpenCurlyDoubleQuote]Context`Name\[CloseCurlyDoubleQuote].\
+\>", "Item",
+ CellChangeTimes->{{3.6234868927248344`*^9, 3.6234869600388346`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Contexts", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.623487432157834*^9, 3.6234874361778345`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Context", "[", "Pi", "]"}]], "Input",
+ CellChangeTimes->{{3.6234872096708345`*^9, 3.6234872162798347`*^9}, {
+  3.6234881291418343`*^9, 3.6234881293808346`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"NameQ", "[", "\"\<System`Pi\>\"", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"NameQ", "[", "\"\<Global`Pi\>\"", "]"}]}], "Input",
+ CellChangeTimes->{{3.6234873285688343`*^9, 3.6234874237708344`*^9}, {
+  3.6234881225578346`*^9, 3.6234881326218348`*^9}}],
+
+Cell["\<\
+By default objects are created in the context \"Global`\".\
+\>", "Item",
+ CellChangeTimes->{{3.6234871437178345`*^9, 3.6234872070788345`*^9}, 
+   3.623487339997834*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", "=", "2"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6234867701738343`*^9, 3.6234867705798345`*^9}, 
+   3.6234888316168346`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Context", "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.6234867757578344`*^9, 3.6234867789798346`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"??", "x"}]], "Input",
+ CellChangeTimes->{{3.6234868100148344`*^9, 3.6234868104098344`*^9}}],
+
+Cell["\<\
+The same symbol can have different values in different Contexts\
+\>", "Item",
+ CellChangeTimes->{{3.623487502518834*^9, 3.6234875392588344`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Context1`x", "=", "3"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6234868245978346`*^9, 3.6234868362158346`*^9}}],
+
+Cell[BoxData[{"x", "\[IndentingNewLine]", "Global`x", "\[IndentingNewLine]", \
+"Context1`x"}], "Input",
+ CellChangeTimes->{{3.6234875573618345`*^9, 3.6234875688008347`*^9}, 
+   3.6234882965868344`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Names", "[", "\"\<*`x\>\"", "]"}]], "Input"],
+
+Cell["\<\
+If the context is omitted the \[OpenCurlyDoubleQuote]$ContextPath\
+\[CloseCurlyDoubleQuote] is searched (in order) for a matching symbol.\
+\>", "Item",
+ CellChangeTimes->{{3.623487502518834*^9, 3.6234875392588344`*^9}, {
+  3.6234881977838345`*^9, 3.623488202846834*^9}, {3.6234882336848345`*^9, 
+  3.623488259282834*^9}, {3.6234883414138346`*^9, 3.6234883562528343`*^9}}],
+
+Cell[BoxData["$ContextPath"], "Input",
+ CellChangeTimes->{{3.6234848426068344`*^9, 3.6234848807178345`*^9}}],
+
+Cell["\<\
+The same symbol should not appear in two different contexts in \
+\[OpenCurlyDoubleQuote]$ContextPath\[CloseCurlyDoubleQuote].\
+\>", "Item",
+ CellChangeTimes->{{3.623487502518834*^9, 3.6234875392588344`*^9}, {
+  3.6234881977838345`*^9, 3.623488202846834*^9}, {3.6234882336848345`*^9, 
+  3.623488259282834*^9}, {3.6234883414138346`*^9, 3.6234883562528343`*^9}, {
+  3.623488533129834*^9, 3.6234885688318343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"System`x", "=", "4"}]], "Input",
+ CellChangeTimes->{{3.6234885708218346`*^9, 3.6234885837918344`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Changing the \"current\" context", "Subsection",
+ CellChangeTimes->{{3.6234886645648346`*^9, 3.6234886817128344`*^9}}],
+
+Cell["Current context", "Item",
+ CellChangeTimes->{{3.623488685426834*^9, 3.623488710374834*^9}}],
+
+Cell[BoxData["$Context"], "Input",
+ CellChangeTimes->{{3.623488712872834*^9, 3.623488715655834*^9}}],
+
+Cell["Change context", "Item",
+ CellChangeTimes->{{3.623488685426834*^9, 3.6234887272528343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<Context1`\>\"", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.623488729926834*^9, 3.623488748398834*^9}}],
+
+Cell[BoxData["$Context"], "Input"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"y", "=", "3"}], ";"}]], "Input",
+ CellChangeTimes->{{3.623488864032834*^9, 3.6234888724538345`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Context", "[", "y", "]"}]], "Input",
+ CellChangeTimes->{{3.623488873905834*^9, 3.6234888767008343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6234888812958345`*^9, 3.6234888834608345`*^9}}],
+
+Cell[BoxData["$Context"], "Input"],
+
+Cell[BoxData[{"y", "\[IndentingNewLine]", "Context1`y"}], "Input",
+ CellChangeTimes->{{3.6234889050788345`*^9, 3.623488919497834*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Packages", "Section",
+ CellChangeTimes->{{3.6234850176048346`*^9, 3.6234850335628347`*^9}}],
+
+Cell[BoxData["$Packages"], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Loading Packages", "Subsection",
+ CellChangeTimes->{{3.6234889951418343`*^9, 3.6234890101478343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<Quaternions`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6234890253318343`*^9, 3.6234890400668344`*^9}}],
+
+Cell[BoxData[{"$Packages", "\[IndentingNewLine]", "$ContextPath"}], "Input",
+ CellChangeTimes->{{3.623489264386834*^9, 3.6234892731708345`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"a", "=", 
+  RowBox[{"ToQuaternion", "[", 
+   RowBox[{"1", "+", 
+    RowBox[{"2", " ", "I"}], "+", 
+    RowBox[{"3", "J"}], "+", 
+    RowBox[{"4", "K"}]}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{"b", "=", 
+  RowBox[{"ToQuaternion", "[", 
+   RowBox[{"J", "+", "K"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6234891071918344`*^9, 3.6234891632348347`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"a", "**", "b"}], "\[IndentingNewLine]", 
+ RowBox[{"b", "**", "a"}]}], "Input",
+ CellChangeTimes->{{3.6234891665128345`*^9, 3.6234891793698344`*^9}, {
+  3.623489228294834*^9, 3.623489237749834*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Creating your own package", "Subsection",
+ CellChangeTimes->{{3.6234850666258345`*^9, 3.6234850733688345`*^9}, {
+  3.623489320615834*^9, 3.6234893332378345`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SetDirectory", "[", 
+  RowBox[{"NotebookDirectory", "[", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6234850514188347`*^9, 3.6234850644188347`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<ExamplePackage`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6234851443008347`*^9, 3.6234851578838344`*^9}}],
+
+Cell["The new package is add to $Packages and $ContextPath", "Item",
+ CellChangeTimes->{{3.6234900127128344`*^9, 3.6234900594328346`*^9}}],
+
+Cell[BoxData["$Packages"], "Input",
+ CellChangeTimes->{{3.6234855950628347`*^9, 3.6234855967518344`*^9}, {
+  3.623485705320834*^9, 3.6234857073848343`*^9}}],
+
+Cell[BoxData["$ContextPath"], "Input",
+ CellChangeTimes->{{3.623485709497834*^9, 3.6234857120198345`*^9}}],
+
+Cell["Usage message is set.", "Item",
+ CellChangeTimes->{{3.623490069827834*^9, 3.6234900822868347`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "ExampleFunction"}]], "Input",
+ CellChangeTimes->{{3.623489755407834*^9, 3.6234897621238346`*^9}}],
+
+Cell["Can use ExampleFunction", "Item",
+ CellChangeTimes->{{3.6234900883448343`*^9, 3.623490114636834*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExampleFunction", "[", "4", "]"}], "//", "TableForm"}]], "Input",
+ CellChangeTimes->{{3.6234853852048345`*^9, 3.623485389596834*^9}, {
+  3.6234854572178345`*^9, 3.623485485405834*^9}}],
+
+Cell["\<\
+Cannot use PrivateFunction from Global context.\
+\>", "Item",
+ CellChangeTimes->{{3.6234901218078346`*^9, 3.6234901639768343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"PrivateFunction", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.6234901359248343`*^9, 3.623490143275834*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ExamplePackage`Private`PrivateFunction", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.6234901671258345`*^9, 3.6234901772658343`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Names", "[", "\"\<ExamplePackage`*\>\"", 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Names", "[", "\"\<ExamplePackage`Private`*\>\"", "]"}]}], "Input",
+ CellChangeTimes->{{3.6234870859028344`*^9, 3.6234871156858344`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{707, 801},
+WindowMargins->{{159, Automatic}, {-39, Automatic}},
+ShowSelection->True,
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 106, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[710, 27, 97, 1, 86, "Section"],
+Cell[CellGroupData[{
+Cell[832, 32, 100, 1, 49, "Subsection"],
+Cell[935, 35, 208, 4, 29, "Item"],
+Cell[1146, 41, 124, 2, 31, "Input"],
+Cell[1273, 45, 184, 3, 31, "Input"],
+Cell[1460, 50, 274, 4, 52, "Input"],
+Cell[1737, 56, 178, 4, 29, "Item"],
+Cell[1918, 62, 165, 4, 31, "Input"],
+Cell[2086, 68, 130, 2, 31, "Input"],
+Cell[2219, 72, 115, 2, 31, "Input"],
+Cell[2337, 76, 155, 3, 29, "Item"],
+Cell[2495, 81, 146, 3, 31, "Input"],
+Cell[2644, 86, 201, 3, 72, "Input"],
+Cell[2848, 91, 68, 1, 31, "Input"],
+Cell[2919, 94, 381, 6, 29, "Item"],
+Cell[3303, 102, 108, 1, 31, "Input"],
+Cell[3414, 105, 420, 7, 29, "Item"],
+Cell[3837, 114, 126, 2, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4000, 121, 124, 1, 49, "Subsection"],
+Cell[4127, 124, 97, 1, 29, "Item"],
+Cell[4227, 127, 100, 1, 31, "Input"],
+Cell[4330, 130, 98, 1, 29, "Item"],
+Cell[4431, 133, 158, 3, 31, "Input"],
+Cell[4592, 138, 34, 0, 31, "Input"],
+Cell[4629, 140, 135, 3, 31, "Input"],
+Cell[4767, 145, 128, 2, 31, "Input"],
+Cell[4898, 149, 139, 3, 31, "Input"],
+Cell[5040, 154, 34, 0, 31, "Input"],
+Cell[5077, 156, 134, 1, 52, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5260, 163, 97, 1, 86, "Section"],
+Cell[5360, 166, 35, 0, 31, "Input"],
+Cell[CellGroupData[{
+Cell[5420, 170, 108, 1, 49, "Subsection"],
+Cell[5531, 173, 147, 2, 31, "Input"],
+Cell[5681, 177, 144, 1, 52, "Input"],
+Cell[5828, 180, 382, 10, 52, "Input"],
+Cell[6213, 192, 222, 4, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6472, 201, 168, 2, 49, "Subsection"],
+Cell[6643, 205, 174, 3, 31, "Input"],
+Cell[6820, 210, 150, 2, 31, "Input"],
+Cell[6973, 214, 138, 1, 29, "Item"],
+Cell[7114, 217, 156, 2, 31, "Input"],
+Cell[7273, 221, 106, 1, 31, "Input"],
+Cell[7382, 224, 105, 1, 29, "Item"],
+Cell[7490, 227, 126, 2, 31, "Input"],
+Cell[7619, 231, 107, 1, 29, "Item"],
+Cell[7729, 234, 219, 4, 31, "Input"],
+Cell[7951, 240, 141, 3, 29, "Item"],
+Cell[8095, 245, 136, 2, 31, "Input"],
+Cell[8234, 249, 161, 2, 31, "Input"],
+Cell[8398, 253, 246, 4, 52, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

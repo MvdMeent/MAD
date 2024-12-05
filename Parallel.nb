@@ -1,0 +1,506 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     15766,        497]
+NotebookOptionsPosition[     12866,        397]
+NotebookOutlinePosition[     13211,        412]
+CellTagsIndexPosition[     13168,        409]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Parallel Computing", "Title",
+ CellChangeTimes->{{3.6241000267264013`*^9, 3.624100039999401*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "By default each ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " kernel runs in a single thread on a single processor core."
+}], "Item",
+ CellChangeTimes->{{3.624100160027401*^9, 3.624100209242401*^9}}],
+
+Cell["Some exceptions:", "Item",
+ CellChangeTimes->{{3.624100160027401*^9, 3.6241002394414015`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Functions created with Compile.\
+\>", "Subitem",
+ CellChangeTimes->{{3.624100160027401*^9, 3.6241002711914015`*^9}}],
+
+Cell["\<\
+(Numerical) Functions using Compile internally. (e.g. Plot, NIntegrate, ...)\
+\>", "Subitem",
+ CellChangeTimes->{{3.624100160027401*^9, 3.6241003283714013`*^9}}],
+
+Cell["\<\
+Some other functions (in some cases) Dot?\
+\>", "Subitem",
+ CellChangeTimes->{{3.624100160027401*^9, 3.624100333305401*^9}, {
+  3.624100375430401*^9, 3.6241003928634014`*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "However, ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " can utilize multiple cores."
+}], "Item",
+ CellChangeTimes->{{3.624100160027401*^9, 3.624100333305401*^9}, {
+  3.624100375430401*^9, 3.624100424315401*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The hard way", "Section",
+ CellChangeTimes->{{3.624100433395401*^9, 3.624100438147401*^9}}],
+
+Cell["Run multiple notebooks on different kernels simultaneously.", "Item",
+ CellChangeTimes->{{3.624100160027401*^9, 3.624100209242401*^9}, {
+  3.624100459097401*^9, 3.624100498414401*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["The easy (ier) way", "Section",
+ CellChangeTimes->{{3.6241005049044013`*^9, 3.624100517486401*^9}}],
+
+Cell["Configure Parallel (sub)kernels (menu).", "Text",
+ CellChangeTimes->{{3.6241008262504015`*^9, 3.624100855711401*^9}, {
+  3.624100986999401*^9, 3.624100988070401*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"LaunchKernels", "[", "2", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ParallelEvaluate", "[", "$KernelID", "]"}]}], "Input",
+ CellChangeTimes->{{3.6241008447994013`*^9, 3.6241008891274014`*^9}}],
+
+Cell[BoxData["$KernelID"], "Input"],
+
+Cell[CellGroupData[{
+
+Cell["Sharing definitions", "Subsection",
+ CellChangeTimes->{{3.624100937810401*^9, 3.6241009684174013`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Each subkernel has its own memory and own definitions.", "Item",
+ CellChangeTimes->{{3.6241009701064014`*^9, 3.624101067861401*^9}}],
+
+Cell["\<\
+By default, non communication between subkernels.\
+\>", "Item",
+ CellChangeTimes->{{3.6241009701064014`*^9, 3.624101119513401*^9}}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{
+   RowBox[{"z", "=", "i"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6241011228194013`*^9, 3.624101186780401*^9}}],
+
+Cell[BoxData["z"], "Input",
+ CellChangeTimes->{3.6241031229419136`*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", "z", "]"}]], "Input",
+ CellChangeTimes->{{3.624101189826401*^9, 3.624101199739401*^9}}],
+
+Cell["\<\
+Definitions appearing in any of the contexts in $DistributedContexts are \
+automatically shared with all subkernels.\
+\>", "Item",
+ CellChangeTimes->{{3.624101225954401*^9, 3.624101274511401*^9}}],
+
+Cell[BoxData["$DistributedContexts"], "Input",
+ CellChangeTimes->{{3.6241012902764015`*^9, 3.6241012937104015`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"y", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ParallelEvaluate", "[", "y", "]"}]}], "Input",
+ CellChangeTimes->{{3.6241012843964014`*^9, 3.624101314866401*^9}}],
+
+Cell["Except when local definitions already exist.", "Item",
+ CellChangeTimes->{{3.6241013232314014`*^9, 3.6241013485354013`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"z", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ParallelEvaluate", "[", "z", "]"}]}], "Input",
+ CellChangeTimes->{{3.624100596018401*^9, 3.624100597473401*^9}, 
+   3.6241006441984015`*^9, {3.624101357553401*^9, 3.6241013608324013`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", 
+  RowBox[{
+   RowBox[{"Clear", "[", "z", "]"}], ",", "1"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6241032195801964`*^9, 3.624103234586819*^9}, {
+  3.6241032706994305`*^9, 3.6241032711674123`*^9}}],
+
+Cell["Use DistributeDefinitions to force update.", "Item",
+ CellChangeTimes->{{3.624101416741401*^9, 3.624101446853401*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"DistributeDefinitions", "[", "z", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ParallelEvaluate", "[", "z", "]"}]}], "Input",
+ CellChangeTimes->{{3.624101395570401*^9, 3.6241014119174013`*^9}}],
+
+Cell["Use ParallelNeeds to load packages for all subkernels", "Item",
+ CellChangeTimes->{{3.624101755820401*^9, 3.624101785669401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Quit", "[", "]"}]], "Input",
+ CellChangeTimes->{{3.624103556361044*^9, 3.6241035579522333`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<Quaternions`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6241035672809734`*^9, 3.6241035755333204`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParallelNeeds", "[", "\"\<Quaternions`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6241017908754015`*^9, 3.624101809820401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", 
+  RowBox[{
+   RowBox[{"Quaternion", "[", 
+    RowBox[{"$KernelID", ",", "1", ",", "1", ",", "1"}], "]"}], "**", 
+   RowBox[{"Quaternion", "[", 
+    RowBox[{"$KernelID", ",", "1", ",", "1", ",", "1"}], "]"}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.6241018134184012`*^9, 3.624101844538401*^9}}],
+
+Cell["\<\
+Create permanently shared variables.\
+\>", "Item",
+ CellChangeTimes->{{3.624101572663401*^9, 3.624101607031401*^9}, {
+  3.624101866126401*^9, 3.624101882333401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"SetSharedVariable", "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.624101886565401*^9, 3.624101891846401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{
+   RowBox[{"x", "=", "i"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "10"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6241011228194013`*^9, 3.624101186780401*^9}, 
+   3.6241019094704013`*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParallelEvaluate", "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.624101189826401*^9, 3.624101199739401*^9}, 
+   3.6241019110214014`*^9}],
+
+Cell["\<\
+Warning : every time a shared variable is updated it temporarily interupts \
+computation on all subKernels.\
+\>", "Text",
+ CellChangeTimes->{{3.6241019214274015`*^9, 3.624101970360401*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Parallel functions", "Subsection",
+ CellChangeTimes->{{3.624101984183401*^9, 3.6241019939364014`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Parallelize", "Subsubsection",
+ CellChangeTimes->{{3.624102044879401*^9, 3.624102050195401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Parallelize", "[", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"$KernelID", ",", "i"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "100"}], "}"}]}], "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.624101999143401*^9, 3.624102036150401*^9}, {
+  3.6241038699046*^9, 3.6241038812926006`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["ParallelTable", "Subsubsection",
+ CellChangeTimes->{3.6241020816254015`*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"$KernelID", ",", "i"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"i", ",", "100"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6241020519774013`*^9, 3.6241020718684015`*^9}, {
+  3.624103731439*^9, 3.6241037355574007`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Also", "Subsubsection",
+ CellChangeTimes->{{3.624102085237401*^9, 3.624102089801401*^9}}],
+
+Cell[BoxData[{"ParallelDo", "\[IndentingNewLine]", "ParallelSum", "\
+\[IndentingNewLine]", "ParallelMap", "\[IndentingNewLine]", \
+"ParallelProduct"}], "Input",
+ CellChangeTimes->{{3.6241020916214013`*^9, 3.6241021345214014`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Method", "Subsubsection",
+ CellChangeTimes->{{3.6241021661744013`*^9, 3.624102172291401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{"$KernelID", ",", 
+   RowBox[{"{", "100", "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.624100713395401*^9, 3.6241007339444013`*^9}, {
+   3.624102177405401*^9, 3.624102216426401*^9}, 3.6241041073522005`*^9}],
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{"$KernelID", ",", 
+   RowBox[{"{", "100", "}"}], ",", 
+   RowBox[{"Method", "\[Rule]", " ", "\"\<FinestGrained\>\""}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.624100713395401*^9, 3.6241007339444013`*^9}, {
+  3.624102177405401*^9, 3.624102216426401*^9}, {3.6241041073522005`*^9, 
+  3.6241041341966004`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ParallelTable", "[", 
+  RowBox[{"$KernelID", ",", 
+   RowBox[{"{", "100", "}"}], ",", 
+   RowBox[{"Method", "\[Rule]", " ", "\"\<CoarsestGrained\>\""}]}], 
+  "]"}]], "Input",
+ CellChangeTimes->{{3.624100713395401*^9, 3.6241007339444013`*^9}, {
+  3.624102177405401*^9, 3.624102216426401*^9}, {3.6241041073522005`*^9, 
+  3.6241041341966004`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", 
+   ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", 
+   "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", ",", "1", 
+   ",", "1", ",", "1", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", 
+   "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", 
+   ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", 
+   "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "3", ",", "3", ",", "3", 
+   ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", 
+   "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", 
+   ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", "3", ",", 
+   "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", 
+   ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", 
+   "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", ",", "4", 
+   ",", "4", ",", "4"}], "}"}]], "Output",
+ CellChangeTimes->{3.624106365596401*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Timing", "[", 
+  RowBox[{"ParallelSum", "[", 
+   RowBox[{"i", ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      SuperscriptBox["10", "4"]}], "}"}]}], "]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Timing", "[", 
+  RowBox[{"ParallelSum", "[", 
+   RowBox[{"i", ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      SuperscriptBox["10", "4"]}], "}"}], ",", 
+    RowBox[{"Method", "\[Rule]", " ", "\"\<CoarsestGrained\>\""}]}], "]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Timing", "[", 
+  RowBox[{"ParallelSum", "[", 
+   RowBox[{"i", ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "1", ",", 
+      SuperscriptBox["10", "4"]}], "}"}], ",", 
+    RowBox[{"Method", "\[Rule]", " ", "\"\<FinestGrained\>\""}]}], "]"}], 
+  "]"}]}], "Input",
+ CellChangeTimes->{{3.624106371968401*^9, 3.624106377583401*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.03120020000000000084949824952218477847`4.514757291228131", ",", 
+   "50005000"}], "}"}]], "Output",
+ CellChangeTimes->{3.6241063786544013`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "0.01560010000000000042474912476109238924`4.21372729556415", ",", 
+   "50005000"}], "}"}]], "Output",
+ CellChangeTimes->{3.624106378670401*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+  "5.97483830000000004645244189305230975151`6.7969260695327725", ",", 
+   "50005000"}], "}"}]], "Output",
+ CellChangeTimes->{3.624106384742401*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["SubKernels the hard way.", "Section",
+ CellChangeTimes->{{3.6241022432664013`*^9, 3.624102252182401*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Use functions :", "Subsection",
+ CellChangeTimes->{{3.624102254129401*^9, 3.624102261630401*^9}}],
+
+Cell[BoxData[{"ParallelSubmit", "\[IndentingNewLine]", "WaitAll", "\
+\[IndentingNewLine]", "WaitAsynchronousTask", "\[IndentingNewLine]", \
+"WaitNext", "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6241022644964013`*^9, 3.6241022984434013`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{707, 778},
+WindowMargins->{{Automatic, 173}, {Automatic, -1}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 103, 1, 101, "Title"],
+Cell[CellGroupData[{
+Cell[707, 27, 226, 6, 29, "Item"],
+Cell[936, 35, 100, 1, 29, "Item"],
+Cell[CellGroupData[{
+Cell[1061, 40, 126, 3, 25, "Subitem"],
+Cell[1190, 45, 171, 3, 25, "Subitem"],
+Cell[1364, 50, 185, 4, 25, "Subitem"]
+}, Open  ]],
+Cell[1564, 57, 237, 7, 29, "Item"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[1838, 69, 97, 1, 86, "Section"],
+Cell[1938, 72, 190, 2, 29, "Item"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2165, 79, 105, 1, 86, "Section"],
+Cell[2273, 82, 172, 2, 30, "Text"],
+Cell[2448, 86, 234, 4, 52, "Input"],
+Cell[2685, 92, 35, 0, 31, "Input"],
+Cell[CellGroupData[{
+Cell[2745, 96, 109, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[2879, 101, 138, 1, 29, "Item"],
+Cell[3020, 104, 141, 3, 29, "Item"]
+}, Open  ]],
+Cell[3176, 110, 231, 6, 31, "Input"],
+Cell[3410, 118, 71, 1, 31, "Input"],
+Cell[3484, 121, 135, 2, 31, "Input"],
+Cell[3622, 125, 206, 4, 45, "Item"],
+Cell[3831, 131, 116, 1, 31, "Input"],
+Cell[3950, 134, 207, 4, 52, "Input"],
+Cell[4160, 140, 130, 1, 29, "Item"],
+Cell[4293, 143, 281, 5, 52, "Input"],
+Cell[4577, 150, 246, 5, 31, "Input"],
+Cell[4826, 157, 124, 1, 29, "Item"],
+Cell[4953, 160, 235, 5, 52, "Input"],
+Cell[5191, 167, 135, 1, 29, "Item"],
+Cell[5329, 170, 120, 2, 31, "Input"],
+Cell[5452, 174, 147, 2, 31, "Input"],
+Cell[5602, 178, 153, 2, 31, "Input"],
+Cell[5758, 182, 346, 8, 52, "Input"],
+Cell[6107, 192, 175, 4, 29, "Item"],
+Cell[6285, 198, 136, 2, 31, "Input"],
+Cell[6424, 202, 259, 7, 31, "Input"],
+Cell[6686, 211, 163, 3, 31, "Input"],
+Cell[6852, 216, 199, 4, 49, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7088, 225, 108, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[7221, 230, 102, 1, 39, "Subsubsection"],
+Cell[7326, 233, 347, 9, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7710, 247, 82, 1, 39, "Subsubsection"],
+Cell[7795, 250, 315, 8, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8147, 263, 95, 1, 39, "Subsubsection"],
+Cell[8245, 266, 230, 3, 92, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8512, 274, 99, 1, 39, "Subsubsection"],
+Cell[8614, 277, 265, 5, 31, "Input"],
+Cell[8882, 284, 366, 8, 31, "Input"],
+Cell[CellGroupData[{
+Cell[9273, 296, 368, 8, 31, "Input"],
+Cell[9644, 306, 1150, 17, 92, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10831, 328, 856, 24, 77, "Input"],
+Cell[11690, 354, 188, 5, 31, "Output"],
+Cell[11881, 361, 185, 5, 31, "Output"],
+Cell[12069, 368, 187, 5, 31, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12329, 381, 111, 1, 86, "Section"],
+Cell[CellGroupData[{
+Cell[12465, 386, 103, 1, 49, "Subsection"],
+Cell[12571, 389, 255, 3, 112, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

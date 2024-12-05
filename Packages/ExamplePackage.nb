@@ -1,0 +1,190 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      5942,        181]
+NotebookOptionsPosition[      4873,        139]
+NotebookOutlinePosition[      5218,        154]
+CellTagsIndexPosition[      5175,        151]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Example Package", "Title",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788232175917845`*^9, 3.578823231227784*^9}, {
+  3.6139051037109823`*^9, 3.6139051076709824`*^9}, {3.616908581630745*^9, 
+  3.6169085821107445`*^9}, {3.6234844803038344`*^9, 3.6234844831498346`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+  "The", " ", "above", " ", "\"\<title\>\"", " ", "cell", " ", "should", " ", 
+   "have", " ", "the", " ", "\"\<initialization group\>\"", " ", "flag", " ", 
+   RowBox[{"set", "."}]}], "*)"}]], "Input",
+ CellChangeTimes->{{3.6234896061058345`*^9, 3.6234896606748343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"BeginPackage", "[", 
+  RowBox[{"\"\<ExamplePackage`\>\"", ",", " ", 
+   RowBox[{"{", "\"\<Quaternions`\>\"", "}"}]}], "]"}]], "Input",
+ InitializationCell->True,
+ InitializationGroup->True,
+ CellChangeTimes->{{3.577535123049368*^9, 3.5775351952483683`*^9}, {
+   3.578823273807784*^9, 3.5788232893777843`*^9}, {3.5860733634744625`*^9, 
+   3.586073363763462*^9}, {3.5867752278177137`*^9, 3.5867752454597135`*^9}, {
+   3.586845213332021*^9, 3.586845215340021*^9}, {3.613905116551983*^9, 
+   3.6139051581569824`*^9}, {3.614409394080241*^9, 3.614409402629241*^9}, {
+   3.6144100604716206`*^9, 3.6144100737819014`*^9}, {3.61441139913676*^9, 
+   3.6144114116130075`*^9}, {3.6144115459964447`*^9, 3.614411566243469*^9}, {
+   3.6157931608885574`*^9, 3.6157931836695576`*^9}, {3.616908589998745*^9, 
+   3.616908601989745*^9}, {3.6234845074848347`*^9, 3.6234845136458344`*^9}, {
+   3.623485247360834*^9, 3.623485250301834*^9}, 3.6234853190108347`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Preamble", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788232346177845`*^9, 3.578823244562784*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"ExampleFunction", "::", "usage"}], "=", 
+   "\"\<ExampleFunction[m] creates a table of useless values of length m+1.\>\
+\""}], ";"}]], "Input",
+ CellChangeTimes->{{3.6234845250368347`*^9, 3.6234845475628347`*^9}, {
+  3.6234896999148345`*^9, 3.6234897255348344`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Private", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788232505847845`*^9, 3.578823269760784*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ InitializationGroup->True,
+ CellChangeTimes->{{3.577535300669368*^9, 3.577535323495368*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"PrivateFunction", "[", "0", "]"}], "=", 
+   RowBox[{"Quaternion", "[", 
+    RowBox[{"1", ",", "2", ",", "3", ",", "4"}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6234846374768343`*^9, 3.6234846630678344`*^9}, {
+  3.6234853384488344`*^9, 3.6234853447598343`*^9}, {3.6234854046058345`*^9, 
+  3.6234854093318343`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"PrivateFunction", "[", "n_", "]"}], ":=", " ", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"PrivateFunction", "[", "n", "]"}], "=", 
+    RowBox[{
+     RowBox[{"PrivateFunction", "[", 
+      RowBox[{"n", "-", "1"}], "]"}], "**", 
+     RowBox[{"PrivateFunction", "[", 
+      RowBox[{"n", "-", "1"}], "]"}]}]}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.623484552985834*^9, 3.6234845634888344`*^9}, {
+  3.6234846001918344`*^9, 3.6234846512048345`*^9}, {3.623485333096834*^9, 
+  3.6234853364728346`*^9}, {3.623489867367834*^9, 3.6234898713968344`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ExampleFunction", "[", "m_", "]"}], ":=", " ", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"i", ",", 
+      RowBox[{"FromQuaternion", "@", 
+       RowBox[{"PrivateFunction", "[", "i", "]"}]}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", "m"}], "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6234846675478344`*^9, 3.6234847283998346`*^9}, {
+  3.6234855293888345`*^9, 3.6234855347088346`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["End", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788243982847843`*^9, 3.5788244009357843`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EndPackage", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->True,
+ InitializationGroup->True,
+ CellChangeTimes->{{3.577535313196368*^9, 3.577535321831368*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{706, 801},
+WindowMargins->{{140, Automatic}, {Automatic, 26}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 282, 4, 101, "Title",
+ InitializationGroup->True],
+Cell[864, 28, 313, 6, 52, "Input"],
+Cell[1180, 36, 964, 15, 31, "Input",
+ InitializationCell->True,
+ InitializationGroup->True],
+Cell[CellGroupData[{
+Cell[2169, 55, 123, 2, 86, "Section",
+ InitializationGroup->True],
+Cell[2295, 59, 313, 7, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2645, 71, 122, 2, 86, "Section",
+ InitializationGroup->True],
+Cell[2770, 75, 213, 5, 31, "Input",
+ InitializationCell->True,
+ InitializationGroup->True],
+Cell[2986, 82, 369, 8, 31, "Input"],
+Cell[3358, 92, 579, 13, 52, "Input"],
+Cell[3940, 107, 476, 12, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4453, 124, 120, 2, 86, "Section",
+ InitializationGroup->True],
+Cell[4576, 128, 269, 7, 52, "Input",
+ InitializationCell->True,
+ InitializationGroup->True]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

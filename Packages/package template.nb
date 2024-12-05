@@ -1,0 +1,124 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      3403,        114]
+NotebookOptionsPosition[      2557,         79]
+NotebookOutlinePosition[      2902,         94]
+CellTagsIndexPosition[      2859,         91]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["... Package", "Title",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788232175917845`*^9, 3.578823231227784*^9}, {
+  3.6139051037109823`*^9, 3.6139051076709824`*^9}, {3.616908581630745*^9, 
+  3.6169085821107445`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"BeginPackage", "[", 
+  RowBox[{"\"\<Package`\>\"", ",", " ", 
+   RowBox[{"{", "}"}]}], "]"}]], "Input",
+ InitializationCell->True,
+ InitializationGroup->True,
+ CellChangeTimes->{{3.577535123049368*^9, 3.5775351952483683`*^9}, {
+  3.578823273807784*^9, 3.5788232893777843`*^9}, {3.5860733634744625`*^9, 
+  3.586073363763462*^9}, {3.5867752278177137`*^9, 3.5867752454597135`*^9}, {
+  3.586845213332021*^9, 3.586845215340021*^9}, {3.613905116551983*^9, 
+  3.6139051581569824`*^9}, {3.614409394080241*^9, 3.614409402629241*^9}, {
+  3.6144100604716206`*^9, 3.6144100737819014`*^9}, {3.61441139913676*^9, 
+  3.6144114116130075`*^9}, {3.6144115459964447`*^9, 3.614411566243469*^9}, {
+  3.6157931608885574`*^9, 3.6157931836695576`*^9}, {3.616908589998745*^9, 
+  3.616908601989745*^9}}],
+
+Cell["Preamble", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788232346177845`*^9, 3.578823244562784*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Private", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788232505847845`*^9, 3.578823269760784*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ InitializationGroup->True,
+ CellChangeTimes->{{3.577535300669368*^9, 3.577535323495368*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["End", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.5788243982847843`*^9, 3.5788244009357843`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"End", "[", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"EndPackage", "[", "]"}], ";"}]}], "Input",
+ InitializationCell->True,
+ InitializationGroup->True,
+ CellChangeTimes->{{3.577535313196368*^9, 3.577535321831368*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{706, 801},
+WindowMargins->{{140, Automatic}, {Automatic, 26}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 228, 4, 101, "Title",
+ InitializationGroup->True],
+Cell[810, 28, 801, 14, 31, "Input",
+ InitializationCell->True,
+ InitializationGroup->True],
+Cell[1614, 44, 123, 2, 86, "Section",
+ InitializationGroup->True],
+Cell[CellGroupData[{
+Cell[1762, 50, 122, 2, 56, "Section",
+ InitializationGroup->True],
+Cell[1887, 54, 213, 5, 31, "Input",
+ InitializationCell->True,
+ InitializationGroup->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2137, 64, 120, 2, 86, "Section",
+ InitializationGroup->True],
+Cell[2260, 68, 269, 7, 52, "Input",
+ InitializationCell->True,
+ InitializationGroup->True]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

@@ -1,0 +1,1216 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     38055,       1207]
+NotebookOptionsPosition[     32300,       1032]
+NotebookOutlinePosition[     32642,       1047]
+CellTagsIndexPosition[     32599,       1044]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Definitions", "Title",
+ CellChangeTimes->{{3.6258969283400116`*^9, 3.625896935317012*^9}}],
+
+Cell["Set, SetDelayed, UpValues and DownValues", "Subtitle",
+ CellChangeTimes->{{3.6258969388970118`*^9, 3.6258969707550116`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Basics", "Section",
+ CellChangeTimes->{{3.6258969735440116`*^9, 3.6258969839850116`*^9}, 
+   3.625897063876012*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Set and SetDelayed", "Subsection",
+ CellChangeTimes->{{3.6258973749920115`*^9, 3.625897390855012*^9}}],
+
+Cell["\<\
+Mathematica has two main commands to make definitions:\
+\>", "Text",
+ CellChangeTimes->{{3.6258972583190117`*^9, 3.625897303390012*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"x", ",", "y"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", "=", "2"}], ";", 
+  RowBox[{"(*", " ", 
+   RowBox[{"Set", "[", 
+    RowBox[{"x", ",", "2"}], "]"}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"y", ":=", "3"}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{"SetDelayed", "[", 
+    RowBox[{"y", ",", "3"}], "]"}], "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6258970949390116`*^9, 3.6258971053460116`*^9}, {
+  3.6258972110500116`*^9, 3.6258972540690117`*^9}, {3.6258973382350116`*^9, 
+  3.6258973440260115`*^9}}],
+
+Cell["\<\
+The main difference is that \"Set\" evaluates the second argument at the \
+momement that \"Set\" is evaluated, while \"SetDelayed\" holds the second \
+argument and only evaluates it when the first argument is called.\
+\>", "Text",
+ CellChangeTimes->{{3.6258973170040116`*^9, 3.6258973227750115`*^9}, {
+  3.6258973930640116`*^9, 3.6258975190870113`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"x", ",", "y"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"x", "=", 
+   RowBox[{"RandomReal", "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"y", ":=", 
+   RowBox[{"RandomReal", "[", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6258975672200117`*^9, 3.6258976426080112`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"{", 
+  RowBox[{"x", ",", "y"}], "}"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{"x", ",", "y"}], "}"}], "\[IndentingNewLine]", 
+ RowBox[{"{", 
+  RowBox[{"x", ",", "y"}], "}"}]}], "Input",
+ CellChangeTimes->{{3.625897644008012*^9, 3.625897656303012*^9}}],
+
+Cell["\<\
+A second related difference is that \"Set\" produces the set value as output, \
+whereas \"SetDelayed\" produces \"Null\" as output (because nothing was \
+evaluated).\
+\>", "Text",
+ CellChangeTimes->{{3.6258977293820114`*^9, 3.6258977496250114`*^9}, {
+  3.625897784270012*^9, 3.6258978526980114`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Print", "[", 
+  RowBox[{"x", "=", "1"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"x", ":=", "1"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6258978554950113`*^9, 3.6258978705020113`*^9}, {
+  3.625897945164012*^9, 3.6258979475960116`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Patterns", "Subsection",
+ CellChangeTimes->{{3.625897976015012*^9, 3.6258979823770113`*^9}}],
+
+Cell["\<\
+The first argument of \"Set\" and \"SetDelayed\" may be a pattern. (As long \
+as the pattern starts with a symbol.)\
+\>", "Text",
+ CellChangeTimes->{{3.625897989638012*^9, 3.6258979975360117`*^9}, {
+  3.625898028975012*^9, 3.6258980884580116`*^9}, {3.6258996512540116`*^9, 
+  3.625899663164012*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"x", ",", "f"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", "x"}]}], "Input",
+ CellChangeTimes->{{3.6258980916890116`*^9, 3.6258981690210114`*^9}, {
+  3.6258997460650115`*^9, 3.6258997464250116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{"but", " ", "not"}], "*)"}], 
+  RowBox[{
+   RowBox[{"2", " ", "x"}], " ", ":=", " ", "3"}]}]], "Input",
+ CellChangeTimes->{{3.6258980916890116`*^9, 3.6258981690210114`*^9}}],
+
+Cell["\<\
+Note : a pattern definition will fail if the first symbol appearing already \
+has a value.\
+\>", "Text",
+ CellChangeTimes->{{3.6258997655380116`*^9, 3.6258998396180115`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"x", ",", "f"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "x_", "]"}], ":=", "x"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.625899847322012*^9, 3.625899857961012*^9}}],
+
+Cell["\<\
+Warning : When making a definition involving it is best practice to use \
+\"SetDelayed\" rathat than \"Set\". The use of \"Set\" with patterns can have \
+unexpected results.\
+\>", "Item",
+ CellChangeTimes->{{3.6258983375870113`*^9, 3.6258983872480116`*^9}, {
+  3.6258984202280116`*^9, 3.6258984733740115`*^9}}],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.6258984821320114`*^9, 3.625898496673012*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"f", ",", "g", ",", "x"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", "y_", "]"}], ":=", 
+  RowBox[{"D", "[", 
+   RowBox[{"y", ",", "x"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "[", "y_", "]"}], "=", 
+   RowBox[{"D", "[", 
+    RowBox[{"y", ",", "x"}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6258982713020115`*^9, 3.6258983172360115`*^9}, {
+  3.6258984978580112`*^9, 3.6258984988730116`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"f", "[", 
+  SuperscriptBox["x", "2"], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"g", "[", 
+  SuperscriptBox["x", "2"], "]"}]}], "Input",
+ CellChangeTimes->{{3.6258983216150117`*^9, 3.6258983301240115`*^9}}],
+
+Cell["\<\
+If you have a need to evaluate the RHS of pattern definition at the time of \
+definition it is better to explicitly use \"Evaluate\" to force the \
+evaluation.\
+\>", "Text",
+ CellChangeTimes->{{3.6258985271290116`*^9, 3.6258986055210114`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", 
+  RowBox[{"Evaluate", "@", 
+   RowBox[{"Expand", "@", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"x", "+", "1"}], ")"}], "5"]}]}]}]], "Input",
+ CellChangeTimes->{{3.6258986112230115`*^9, 3.6258986430800114`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", "x", "]"}]], "Input",
+ CellChangeTimes->{{3.6258986473260117`*^9, 3.6258986615750113`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Setting multiple values", "Subsection",
+ CellChangeTimes->{{3.6258992399760113`*^9, 3.6258992524390116`*^9}}],
+
+Cell["\<\
+\"Set\" and \"SetDelayed\" automatically thread overlists allowing multiple \
+assignments.\
+\>", "Text",
+ CellChangeTimes->{{3.6258993341350117`*^9, 3.6258993911350117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"x", ",", "y", ",", "u", ",", "v"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"1", ",", "2"}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"u", ",", "v"}], "}"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"3", ",", "4"}], "}"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6258992540900116`*^9, 3.6258993162130117`*^9}, {
+  3.6258994016720114`*^9, 3.6258994057990117`*^9}}],
+
+Cell[BoxData[{"x", "\[IndentingNewLine]", "y", "\[IndentingNewLine]", "u", "\
+\[IndentingNewLine]", "v"}], "Input",
+ CellChangeTimes->{
+  3.6258992815440116`*^9, {3.625899321692012*^9, 3.6258993257230115`*^9}}],
+
+Cell["Neat application : swap values", "Item",
+ CellChangeTimes->{{3.6258994096090117`*^9, 3.6258994480760117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}], "=", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", "x"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", "x", "\[IndentingNewLine]", "y"}], "Input",
+ CellChangeTimes->{{3.625899454100012*^9, 3.625899474074012*^9}, {
+  3.6258995044650116`*^9, 3.6258995237830114`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Warning", ":", " ", 
+  RowBox[{
+  "do", " ", "not", " ", "try", " ", "this", " ", "with", " ", 
+   "\"\<SetDelayed\>\""}], ":"}]], "Input",
+ CellChangeTimes->{{3.6258995320590115`*^9, 3.6258995634440117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"x", ",", "y"}], "}"}], ":=", 
+   RowBox[{"{", 
+    RowBox[{"y", ",", "x"}], "}"}]}], 
+  ";"}], "\[IndentingNewLine]", "x"}], "Input",
+ CellChangeTimes->{{3.625899572461012*^9, 3.6258995981550117`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Nested Set and SetDelayed.", "Subsection",
+ CellChangeTimes->{{3.6258976815230117`*^9, 3.6258976964830112`*^9}}],
+
+Cell["\<\
+\[OpenCurlyDoubleQuote]Set\[CloseCurlyDoubleQuote] and \
+\[OpenCurlyDoubleQuote]SetDelayed\[CloseCurlyDoubleQuote] are \
+\[OpenCurlyQuote]normal\[CloseCurlyQuote] mathematica commands and can \
+therefore appear inside other commands. In particular, they can appear inside \
+each other.\
+\>", "Text",
+ CellChangeTimes->{{3.6258977020430117`*^9, 3.6258977182010117`*^9}, {
+  3.6258986688440113`*^9, 3.6258987433040113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"fib", ",", "fib2"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6258987447450113`*^9, 3.6258987575510116`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fib", "[", "n_", "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{"fib", "[", 
+    RowBox[{"n", "-", "1"}], "]"}], "+", 
+   RowBox[{"fib", "[", 
+    RowBox[{"n", "-", "2"}], "]"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib", "[", "0", "]"}], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib", "[", "1", "]"}], "=", "1"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.625898765343012*^9, 3.6258988131160116`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fib2", "[", "n_", "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{"fib2", "[", "n", "]"}], "=", 
+   RowBox[{
+    RowBox[{"fib2", "[", 
+     RowBox[{"n", "-", "1"}], "]"}], "+", 
+    RowBox[{"fib2", "[", 
+     RowBox[{"n", "-", "2"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib2", "[", "0", "]"}], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib2", "[", "1", "]"}], "=", "1"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6258988267410116`*^9, 3.6258988403870115`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fib", "[", "30", "]"}], "//", "Timing"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fib2", "[", "30", "]"}], "//", "Timing"}]}], "Input",
+ CellChangeTimes->{{3.6258988548230114`*^9, 3.6258989332130117`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["DownValues and UpValues", "Section",
+ CellChangeTimes->{{3.6258998741870117`*^9, 3.6258999166930113`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Assignments involving multiple symbols", "Subsection",
+ CellChangeTimes->{{3.625900932206012*^9, 3.6259009556820116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", 
+  RowBox[{"f", ",", "g"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6259009845470114`*^9, 3.6259009897680116`*^9}}],
+
+Cell["\<\
+Consider the following assignments:\
+\>", "Text",
+ CellChangeTimes->{{3.625900962277012*^9, 3.6259009821760116`*^9}, {
+  3.6259014031560116`*^9, 3.6259014058280115`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"g", "[", "x_", "]"}], "]"}], ":=", " ", 
+  SuperscriptBox["x", "2"]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"g", "[", "0", "]"}], "]"}], "=", " ", "1"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.625900999956012*^9, 3.6259010200620117`*^9}, {
+   3.6259013905830116`*^9, 3.6259013996460114`*^9}, 3.6259014302290115`*^9}],
+
+Cell[TextData[{
+ "In principle these definitions could be associated with either the symbol \
+\"f\" or \"g\". The default behaviour of ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " is to assign it the \[OpenCurlyDoubleQuote]outer\[CloseCurlyDoubleQuote] \
+symbol. (i.e. \[OpenCurlyDoubleQuote]f\[CloseCurlyDoubleQuote])."
+}], "Text",
+ CellChangeTimes->{{3.6259010447460117`*^9, 3.625901056612012*^9}, {
+  3.6259011217360115`*^9, 3.6259012311680117`*^9}, {3.6259014138680115`*^9, 
+  3.6259014225870113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.625901232159012*^9, 3.6259012423930116`*^9}, 
+   3.625901438218012*^9}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "g", "]"}]], "Input",
+ CellChangeTimes->{{3.625901232159012*^9, 3.6259012423930116`*^9}, 
+   3.625901438218012*^9}],
+
+Cell[CellGroupData[{
+
+Cell["Terminology", "Subsubsection",
+ CellChangeTimes->{{3.625900710916012*^9, 3.6259007432160115`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\"OwnValue\" == Value assigned directly to a symbol.", "Item",
+ CellChangeTimes->{{3.6259008203660116`*^9, 3.6259008292570114`*^9}}],
+
+Cell["\<\
+\"DownValue\" == Definition associated to a symbol, where the symbol appears \
+at the \[OpenCurlyQuote]head\[CloseCurlyQuote] of the pattern.\
+\>", "Item",
+ CellChangeTimes->{{3.6259008203660116`*^9, 3.625900897685012*^9}}],
+
+Cell["\<\
+\"UpValue\" == Definition associated to a symbol, where the symbol appears \
+inside the pattern.\
+\>", "Item",
+ CellChangeTimes->{{3.6259008203660116`*^9, 3.6259008292570114`*^9}, {
+  3.6259009029250116`*^9, 3.6259009195640116`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["UpSet and UpSetDelayed", "Subsubsection",
+ CellChangeTimes->{{3.625901447843012*^9, 3.6259014577850113`*^9}, 
+   3.6259014919760113`*^9}],
+
+Cell["\<\
+The reverse behaviour can be achieved using \"UpSet\" and \"UpSetDelayed\".\
+\>", "Text",
+ CellChangeTimes->{{3.6259014973490114`*^9, 3.6259015374520116`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"g", "[", "x_", "]"}], "]"}], "^:=", " ", 
+   SuperscriptBox["x", "3"]}], " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{"UpSetDelayed", "[", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"g", "[", "x_", "]"}], "]"}], ",", 
+     SuperscriptBox["x", "3"]}], "]"}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{"g", "[", "0", "]"}], "]"}], "^=", " ", "2"}], ";", " ", 
+  RowBox[{"(*", 
+   RowBox[{"UpSetDelayed", "[", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"g", "[", "0", "]"}], "]"}], ",", "2"}], "]"}], " ", 
+   "*)"}]}]}], "Input",
+ CellChangeTimes->{{3.6259015472050114`*^9, 3.6259015713200116`*^9}, {
+  3.6259016016570115`*^9, 3.6259016832450113`*^9}}],
+
+Cell["The definitions are now associated to \"g\".", "Text",
+ CellChangeTimes->{{3.625901738468012*^9, 3.6259017625980115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "g", "]"}]], "Input",
+ CellChangeTimes->{{3.6259017676720114`*^9, 3.625901770206012*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{3.6259017794700117`*^9}],
+
+Cell["\<\
+UpValues take precedence over DownValues.\
+\>", "Item",
+ CellChangeTimes->{{3.625901818607012*^9, 3.6259018397690115`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"f", "[", 
+  RowBox[{"g", "[", "0", "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"f", "[", 
+  RowBox[{"g", "[", "x", "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6259017892760115`*^9, 3.6259017930050116`*^9}, {
+  3.6259018524740114`*^9, 3.6259018544970117`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Example", "Subsubsection",
+ CellChangeTimes->{{3.6259021078970118`*^9, 3.6259021130630116`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"c", ",", "t"}], "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"c", "[", 
+    RowBox[{"x_", "?", "NumericQ"}], "]"}], ":=", 
+   RowBox[{"Conjugate", "[", "x", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6259021243810115`*^9, 3.6259021274550114`*^9}, {
+  3.6259024583790116`*^9, 3.6259024814410114`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"c", "[", 
+    RowBox[{"Sin", "[", "t", "]"}], "]"}], ",", "t"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6259021484080114`*^9, 3.6259021887160115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{"c", "[", "x_", "]"}], ",", "t_"}], "]"}], ":=", 
+  RowBox[{"c", "[", 
+   RowBox[{"D", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], "]"}], " "}]], "Input",
+ CellChangeTimes->{{3.625902199461012*^9, 3.6259022597030115`*^9}, 
+   3.6259026207360115`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"D", "[", 
+   RowBox[{
+    RowBox[{"c", "[", "x_", "]"}], ",", "t_"}], "]"}], "^:=", 
+  RowBox[{"c", "[", 
+   RowBox[{"D", "[", 
+    RowBox[{"x", ",", "t"}], "]"}], "]"}], " "}]], "Input",
+ CellChangeTimes->{3.625902269343012*^9, 3.6259026163050117`*^9}],
+
+Cell[BoxData[
+ RowBox[{"D", "[", 
+  RowBox[{
+   RowBox[{"c", "[", 
+    RowBox[{"Sin", "[", "t", "]"}], "]"}], ",", "t"}], "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["More than two symbols", "Subsection",
+ CellChangeTimes->{{3.6259018676820116`*^9, 3.6259018920060115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"f", ",", "g", ",", "h"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6259018956210117`*^9, 3.625901901270012*^9}}],
+
+Cell["\<\
+If more than one symbol appears inside a definition, UpSet and UpSetDelayed \
+define UpValues for all these symbols.\
+\>", "Text",
+ CellChangeTimes->{{3.6259019040760117`*^9, 3.6259019657130117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", 
+    RowBox[{
+     RowBox[{"g", "[", "x_", "]"}], ",", "h"}], "]"}], "^:=", " ", 
+   SuperscriptBox["x", "3"]}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"f", "[", 
+     RowBox[{
+      RowBox[{"g", "[", "0", "]"}], ",", "h"}], "]"}], "^=", " ", "2"}], 
+   ";"}], " "}]}], "Input",
+ CellChangeTimes->{{3.6259020656460114`*^9, 3.6259020885140114`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.625902522362012*^9, 3.6259025246860113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "g", "]"}]], "Input",
+ CellChangeTimes->{3.6259025327010117`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "h", "]"}]], "Input",
+ CellChangeTimes->{3.6259025358770113`*^9}],
+
+Cell[CellGroupData[{
+
+Cell["TagSet and TagSetDelayed", "Subsubsection",
+ CellChangeTimes->{{3.6259025750100117`*^9, 3.6259025854970117`*^9}}],
+
+Cell["\<\
+To control to what symbols a definition is associated use TagSet and \
+TagSetDelayed.\
+\>", "Text",
+ CellChangeTimes->{{3.625902565388012*^9, 3.625902609928012*^9}, {
+  3.6259026409580116`*^9, 3.6259026530140114`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"f", ",", "g", ",", "h"}], "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g", "/:", 
+   RowBox[{"f", "[", 
+    RowBox[{
+     RowBox[{"g", "[", "x_", "]"}], ",", "h"}], "]"}], ":=", " ", 
+   SuperscriptBox["x", "3"]}], " "}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"g", "/:", 
+    RowBox[{"f", "[", 
+     RowBox[{
+      RowBox[{"g", "[", "0", "]"}], ",", "h"}], "]"}], "=", " ", "2"}], ";"}],
+   " "}]}], "Input",
+ CellChangeTimes->{{3.6259020656460114`*^9, 3.6259020885140114`*^9}, {
+  3.625902665678012*^9, 3.6259026982760115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.625902522362012*^9, 3.6259025246860113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "g", "]"}]], "Input",
+ CellChangeTimes->{3.6259025327010117`*^9}],
+
+Cell[BoxData[
+ RowBox[{"Definition", "[", "h", "]"}]], "Input",
+ CellChangeTimes->{3.6259025358770113`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Application : Defining Tensor objects", "Subsection",
+ CellChangeTimes->{{3.6259027534060116`*^9, 3.6259027784840117`*^9}}],
+
+Cell["\<\
+Suppose we want to define objects that represent tensors including their type.\
+\>", "Text",
+ CellChangeTimes->{{3.6259028126800117`*^9, 3.6259028537750115`*^9}}],
+
+Cell["Define error message for wroongly formatted input :", "Item",
+ CellChangeTimes->{{3.6259031445400114`*^9, 3.6259031676750116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Tensor", "[", 
+    RowBox[{"type_", ",", "array_"}], "]"}], "/;", 
+   RowBox[{
+    RowBox[{"Length", "[", "type", "]"}], "\[NotEqual]", 
+    RowBox[{"TensorRank", "[", "array", "]"}]}]}], ":=", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"Message", "[", 
+     RowBox[{
+      RowBox[{"Tensor", "::", "incompatible"}], ",", "type", ",", "array"}], 
+     "]"}], ";", " ", 
+    RowBox[{"Hold", "[", 
+     RowBox[{"Tensor", "[", 
+      RowBox[{"type", ",", "array"}], "]"}], "]"}]}], ")"}]}]], "Input",
+ CellChangeTimes->{{3.6259028597940116`*^9, 3.6259029885610113`*^9}, {
+  3.625903059843012*^9, 3.6259030644040117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Tensor", "::", "incompatible"}], "=", 
+   "\"\<Rand of array `2` does not match type specification `1`.\>\""}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.625903079442012*^9, 3.6259031262080116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Tensor", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1", ",", "1"}], "}"}], ",", 
+   RowBox[{"(", GridBox[{
+      {"1", "2"},
+      {"3", "4"}
+     }], ")"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6259030551240115`*^9, 3.6259030552280116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Tensor", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"1", ",", "1"}], "}"}], ",", 
+   RowBox[{"(", GridBox[{
+      {"1", "2"},
+      {"3", "4"}
+     }], ")"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6259029931540117`*^9, 3.625903046508012*^9}}],
+
+Cell["Define scalar multiplication:", "Item",
+ CellChangeTimes->{{3.6259031445400114`*^9, 3.6259031940970116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Tensor", "/:", 
+  RowBox[{
+   RowBox[{"a_", "?", "NumericQ"}], " ", 
+   RowBox[{"Tensor", "[", 
+    RowBox[{"type_", ",", "array_"}], "]"}]}], ":=", 
+  RowBox[{"Tensor", "[", 
+   RowBox[{"type", ",", 
+    RowBox[{"a", " ", "array"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6259032055310116`*^9, 3.6259032623510113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"2", 
+  RowBox[{"Tensor", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}], ",", 
+    RowBox[{"(", GridBox[{
+       {"1", "2"},
+       {"3", "4"}
+      }], ")"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{3.6259032561750116`*^9}],
+
+Cell["\<\
+Define addition of tensors of similar type:\
+\>", "Item",
+ CellChangeTimes->{{3.6259031445400114`*^9, 3.6259031940970116`*^9}, {
+  3.6259032788280115`*^9, 3.6259032896510115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Tensor", "/:", 
+  RowBox[{
+   RowBox[{"Tensor", "[", 
+    RowBox[{"type_", ",", "array1_"}], "]"}], "+", 
+   RowBox[{"Tensor", "[", 
+    RowBox[{"type_", ",", "array2_"}], "]"}]}], ":=", " ", 
+  RowBox[{"Tensor", "[", 
+   RowBox[{"type", ",", 
+    RowBox[{"array1", "+", "array2"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6259032990770116`*^9, 3.6259033335300117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Tensor", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}], ",", 
+    RowBox[{"(", GridBox[{
+       {"1", "2"},
+       {"3", "4"}
+      }], ")"}]}], "]"}], "+", 
+  RowBox[{"Tensor", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}], ",", 
+    RowBox[{"(", GridBox[{
+       {"4", "2"},
+       {"3", "4"}
+      }], ")"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.625903345961012*^9, 3.625903350553012*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Tensor", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", "1"}], "}"}], ",", 
+    RowBox[{"(", GridBox[{
+       {"1", "2"},
+       {"3", "4"}
+      }], ")"}]}], "]"}], "+", 
+  RowBox[{"Tensor", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"1", ",", 
+      RowBox[{"-", "1"}]}], "}"}], ",", 
+    RowBox[{"(", GridBox[{
+       {"4", "2"},
+       {"3", "4"}
+      }], ")"}]}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.6259033629690113`*^9, 3.6259033630730114`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Manipulating UpValues and DownValues", "Section",
+ CellChangeTimes->{{3.625903480494012*^9, 3.6259035113980117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"f", ",", "g", ",", "h", ",", "x", ",", "y"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"y_", ",", "1"}], "]"}], ":=", "y"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"g", "[", "x_", "]"}], "]"}], ":=", 
+  SuperscriptBox["x", "2"]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"g", "[", 
+   RowBox[{"f", "[", "x_", "]"}], "]"}], "^:=", 
+  SuperscriptBox["x", "3"]}]}], "Input",
+ CellChangeTimes->{{3.6259036203350115`*^9, 3.6259036624060116`*^9}, {
+  3.6259037046280117`*^9, 3.6259037085550117`*^9}, {3.6259037563600116`*^9, 
+  3.6259037676550117`*^9}, {3.6259038354990115`*^9, 3.6259038360580115`*^9}, {
+  3.6259040111370115`*^9, 3.6259040133750114`*^9}}],
+
+Cell["\<\
+\"DownValues[f]\" produces a list of all DownValues associated to \"f\".\
+\>", "Text",
+ CellChangeTimes->{{3.6259037200000114`*^9, 3.6259037353840113`*^9}, {
+  3.625903776765012*^9, 3.6259037938520117`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"DownValues", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.6259036001340113`*^9, 3.625903604081012*^9}}],
+
+Cell["\<\
+\[OpenCurlyDoubleQuote]UpValues[f]\" produces a list of all UpValues \
+associated to \"f\".\
+\>", "Text",
+ CellChangeTimes->{{3.6259037200000114`*^9, 3.6259037353840113`*^9}, {
+  3.625903776765012*^9, 3.6259038134980116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"UpValues", "[", "f", "]"}]], "Input",
+ CellChangeTimes->{{3.6259036001340113`*^9, 3.625903604081012*^9}, {
+  3.625903816508012*^9, 3.625903816883012*^9}}],
+
+Cell["\<\
+Down/UpValue lists can be manipulated directly :\
+\>", "Text",
+ CellChangeTimes->{{3.6259038444780116`*^9, 3.6259038799010115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DownValues", "[", "h", "]"}], "=", 
+  RowBox[{
+   RowBox[{"DownValues", "[", "f", "]"}], "/.", 
+   RowBox[{"f", "\[Rule]", "h"}]}]}]], "Input",
+ CellChangeTimes->{{3.6259038657480116`*^9, 3.6259038851740117`*^9}, {
+  3.6259039356440115`*^9, 3.625903948914012*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"h", "[", 
+  RowBox[{"y", ",", "1"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"h", "[", 
+  RowBox[{"g", "[", "y", "]"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6259038875880117`*^9, 3.625903900902012*^9}, {
+   3.625903953034012*^9, 3.6259039860490117`*^9}, 3.625904039645012*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"UpValues", "[", "h", "]"}], "=", 
+  RowBox[{
+   RowBox[{"UpValues", "[", "f", "]"}], "/.", 
+   RowBox[{"f", "\[Rule]", "h"}]}]}]], "Input",
+ CellChangeTimes->{{3.6259040527880116`*^9, 3.6259040583870115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"g", "[", 
+  RowBox[{"h", "[", "y", "]"}], "]"}]], "Input",
+ CellChangeTimes->{{3.625904064659012*^9, 3.625904067515012*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Cleaning up Menomic functions", "Subsubsection",
+ CellChangeTimes->{{3.6259047319980116`*^9, 3.6259047493980117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "fib", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"fib", "[", "n_", "]"}], ":=", " ", 
+  RowBox[{
+   RowBox[{"fib", "[", "n", "]"}], "=", 
+   RowBox[{
+    RowBox[{"fib", "[", 
+     RowBox[{"n", "-", "1"}], "]"}], "+", 
+    RowBox[{"fib", "[", 
+     RowBox[{"n", "-", "2"}], "]"}]}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib", "[", "0", "]"}], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"fib", "[", "1", "]"}], "=", "1"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"fibdefinition", "=", 
+   RowBox[{"DownValues", "[", "fib", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.625904826178012*^9, 3.625904850817012*^9}, {
+  3.6259049587230115`*^9, 3.6259049590450115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"fib", "[", "30", "]"}]], "Input",
+ CellChangeTimes->{{3.6259048353790116`*^9, 3.6259048400170116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DownValues", "[", "fib", "]"}], "//", "TableForm"}]], "Input",
+ CellChangeTimes->{{3.6259048576930113`*^9, 3.6259048745590115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Resetfib", "[", "]"}], ":=", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"DownValues", "[", "fib", "]"}], "=", "fibdefinition"}], ";"}], 
+   ")"}]}]], "Input",
+ CellChangeTimes->{{3.6259048968390117`*^9, 3.6259049399300117`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{"Resetfib", "[", "]"}], "\n", 
+ RowBox[{
+  RowBox[{"DownValues", "[", "fib", "]"}], "//", "TableForm"}]}], "Input",
+ CellChangeTimes->{{3.6259049231250114`*^9, 3.625904930843012*^9}, 
+   3.625904987112012*^9}],
+
+Cell[BoxData["Down"], "Input",
+ CellChangeTimes->{{3.625904944324012*^9, 3.6259049447950115`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Precedence", "Subsection",
+ CellChangeTimes->{{3.6259035472970114`*^9, 3.6259035528590117`*^9}}],
+
+Cell[TextData[{
+ "When evaluating expressions ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " processes definitions in the following order of precedence:"
+}], "Text",
+ CellChangeTimes->{{3.6259041004530115`*^9, 3.6259041465240116`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Any OwnValues associcated to symbols.\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.625904149414012*^9, 3.6259041748600116`*^9}}],
+
+Cell["\<\
+Any UpValues associated to symbols with definitions higher up in the list \
+taking precedence.\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.625904149414012*^9, 3.6259042505910115`*^9}}],
+
+Cell["\<\
+Any DownValues associated to symbols with definitions higher up in the list \
+taking precedence.\
+\>", "ItemNumbered",
+ CellChangeTimes->{{3.625904149414012*^9, 3.625904260197012*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "By default, ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " tries to order definitions in the Down/UpValue lists from specific to \
+general, having specific definitions take precedence over general ones."
+}], "Text",
+ CellChangeTimes->{{3.625904278414012*^9, 3.6259043633820114`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "f", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", 
+  RowBox[{"1", "/", "x"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f", "[", "0", "]"}], "=", "0"}], ";"}]}], "Input",
+ CellChangeTimes->{{3.625904366935012*^9, 3.6259043712070117`*^9}, 
+   3.6259044357230115`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DownValues", "[", "f", "]"}], "//", "TableForm"}]], "Input",
+ CellChangeTimes->{{3.6259044217380114`*^9, 3.6259044453140116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", "0", "]"}]], "Input",
+ CellChangeTimes->{{3.6259044532170115`*^9, 3.625904454914012*^9}}],
+
+Cell["\<\
+If no clear order can be determined, the order of definition will be taken.\
+\>", "Text",
+ CellChangeTimes->{{3.625904465079012*^9, 3.6259044861760116`*^9}, {
+  3.6259045500760117`*^9, 3.6259045782750115`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"x_", ",", "0"}], "]"}], ":=", "1"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"0", ",", "x_"}], "]"}], ":=", "2"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"x_", ",", "y_"}], "]"}], ":=", "3"}]}], "Input",
+ CellChangeTimes->{{3.6259044905020113`*^9, 3.6259045308140116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"DownValues", "[", "f", "]"}], "//", "TableForm"}]], "Input"],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"0", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.625904536140012*^9, 3.625904543956012*^9}}],
+
+Cell["\<\
+The Down/UpValues lists can be manipulated to change the order of precedence.\
+\>", "Text",
+ CellChangeTimes->{{3.6259045839040117`*^9, 3.6259046330540113`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"DownValues", "[", "f", "]"}], "=", 
+    RowBox[{"Reverse", "@", 
+     RowBox[{"DownValues", "@", "f"}]}]}], ")"}], "//", 
+  "TableForm"}]], "Input",
+ CellChangeTimes->{{3.6259046361570115`*^9, 3.6259046624920115`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"f", "[", 
+  RowBox[{"0", ",", "0"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6259046898270116`*^9, 3.6259047100020113`*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{707, 801},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 96, 1, 101, "Title"],
+Cell[678, 25, 130, 1, 56, "Subtitle"],
+Cell[CellGroupData[{
+Cell[833, 30, 121, 2, 86, "Section"],
+Cell[CellGroupData[{
+Cell[979, 36, 108, 1, 49, "Subsection"],
+Cell[1090, 39, 146, 3, 30, "Text"],
+Cell[1239, 44, 597, 15, 72, "Input"],
+Cell[1839, 61, 363, 6, 68, "Text"],
+Cell[2205, 69, 375, 10, 72, "Input"],
+Cell[2583, 81, 286, 7, 72, "Input"],
+Cell[2872, 90, 310, 6, 49, "Text"],
+Cell[3185, 98, 287, 6, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3509, 109, 98, 1, 49, "Subsection"],
+Cell[3610, 112, 309, 6, 49, "Text"],
+Cell[3922, 120, 305, 7, 52, "Input"],
+Cell[4230, 129, 225, 6, 31, "Input"],
+Cell[4458, 137, 184, 4, 30, "Text"],
+Cell[4645, 143, 335, 9, 72, "Input"],
+Cell[4983, 154, 320, 6, 45, "Item"],
+Cell[5306, 162, 94, 1, 31, "Input"],
+Cell[5403, 165, 519, 14, 72, "Input"],
+Cell[5925, 181, 229, 5, 55, "Input"],
+Cell[6157, 188, 253, 5, 49, "Text"],
+Cell[6413, 195, 287, 8, 31, "Input"],
+Cell[6703, 205, 124, 2, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6864, 212, 115, 1, 49, "Subsection"],
+Cell[6982, 215, 184, 4, 30, "Text"],
+Cell[7169, 221, 581, 18, 72, "Input"],
+Cell[7753, 241, 210, 3, 92, "Input"],
+Cell[7966, 246, 116, 1, 29, "Item"],
+Cell[8085, 249, 345, 9, 72, "Input"],
+Cell[8433, 260, 233, 5, 31, "Input"],
+Cell[8669, 267, 267, 8, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8973, 280, 118, 1, 49, "Subsection"],
+Cell[9094, 283, 432, 8, 49, "Text"],
+Cell[9529, 293, 175, 4, 31, "Input"],
+Cell[9707, 299, 489, 14, 72, "Input"],
+Cell[10199, 315, 556, 16, 72, "Input"],
+Cell[10758, 333, 246, 5, 52, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[11053, 344, 112, 1, 86, "Section"],
+Cell[CellGroupData[{
+Cell[11190, 349, 128, 1, 49, "Subsection"],
+Cell[11321, 352, 151, 3, 31, "Input"],
+Cell[11475, 357, 180, 4, 30, "Text"],
+Cell[11658, 363, 417, 10, 52, "Input"],
+Cell[12078, 375, 516, 10, 49, "Text"],
+Cell[12597, 387, 157, 3, 31, "Input"],
+Cell[12757, 392, 157, 3, 31, "Input"],
+Cell[CellGroupData[{
+Cell[12939, 399, 104, 1, 39, "Subsubsection"],
+Cell[CellGroupData[{
+Cell[13068, 404, 138, 1, 29, "Item"],
+Cell[13209, 407, 233, 4, 45, "Item"],
+Cell[13445, 413, 243, 5, 45, "Item"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13737, 424, 143, 2, 39, "Subsubsection"],
+Cell[13883, 428, 169, 3, 30, "Text"],
+Cell[14055, 433, 785, 23, 54, "Input"],
+Cell[14843, 458, 128, 1, 30, "Text"],
+Cell[14974, 461, 131, 2, 31, "Input"],
+Cell[15108, 465, 107, 2, 31, "Input"],
+Cell[15218, 469, 133, 3, 29, "Item"],
+Cell[15354, 474, 290, 6, 52, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15681, 485, 102, 1, 39, "Subsubsection"],
+Cell[15786, 488, 376, 10, 52, "Input"],
+Cell[16165, 500, 208, 5, 31, "Input"],
+Cell[16376, 507, 317, 9, 31, "Input"],
+Cell[16696, 518, 288, 8, 31, "Input"],
+Cell[16987, 528, 138, 4, 31, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17174, 538, 113, 1, 49, "Subsection"],
+Cell[17290, 541, 178, 4, 31, "Input"],
+Cell[17471, 547, 210, 4, 49, "Text"],
+Cell[17684, 553, 442, 14, 52, "Input"],
+Cell[18129, 569, 131, 2, 31, "Input"],
+Cell[18263, 573, 107, 2, 31, "Input"],
+Cell[18373, 577, 107, 2, 31, "Input"],
+Cell[CellGroupData[{
+Cell[18505, 583, 119, 1, 39, "Subsubsection"],
+Cell[18627, 586, 228, 5, 30, "Text"],
+Cell[18858, 593, 623, 18, 72, "Input"],
+Cell[19484, 613, 131, 2, 31, "Input"],
+Cell[19618, 617, 107, 2, 31, "Input"],
+Cell[19728, 621, 107, 2, 31, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19884, 629, 129, 1, 49, "Subsection"],
+Cell[20016, 632, 172, 3, 30, "Text"],
+Cell[20191, 637, 137, 1, 29, "Item"],
+Cell[20331, 640, 662, 18, 52, "Input"],
+Cell[20996, 660, 246, 6, 52, "Input"],
+Cell[21245, 668, 284, 9, 42, "Input"],
+Cell[21532, 679, 272, 9, 42, "Input"],
+Cell[21807, 690, 115, 1, 29, "Item"],
+Cell[21925, 693, 348, 9, 31, "Input"],
+Cell[22276, 704, 273, 10, 42, "Input"],
+Cell[22552, 716, 190, 4, 29, "Item"],
+Cell[22745, 722, 397, 10, 52, "Input"],
+Cell[23145, 734, 485, 18, 42, "Input"],
+Cell[23633, 754, 511, 19, 42, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[24193, 779, 123, 1, 86, "Section"],
+Cell[24319, 782, 785, 19, 92, "Input"],
+Cell[25107, 803, 217, 4, 30, "Text"],
+Cell[25327, 809, 131, 2, 31, "Input"],
+Cell[25461, 813, 236, 5, 30, "Text"],
+Cell[25700, 820, 178, 3, 31, "Input"],
+Cell[25881, 825, 142, 3, 30, "Text"],
+Cell[26026, 830, 299, 7, 31, "Input"],
+Cell[26328, 839, 304, 6, 52, "Input"],
+Cell[26635, 847, 244, 6, 31, "Input"],
+Cell[26882, 855, 148, 3, 31, "Input"],
+Cell[CellGroupData[{
+Cell[27055, 862, 124, 1, 39, "Subsubsection"],
+Cell[27182, 865, 781, 22, 112, "Input"],
+Cell[27966, 889, 127, 2, 31, "Input"],
+Cell[28096, 893, 167, 3, 31, "Input"],
+Cell[28266, 898, 275, 8, 31, "Input"],
+Cell[28544, 908, 233, 5, 52, "Input"],
+Cell[28780, 915, 98, 1, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28915, 921, 102, 1, 49, "Subsection"],
+Cell[29020, 924, 243, 6, 49, "Text"],
+Cell[CellGroupData[{
+Cell[29288, 934, 137, 3, 30, "ItemNumbered"],
+Cell[29428, 939, 194, 4, 47, "ItemNumbered"],
+Cell[29625, 945, 194, 4, 47, "ItemNumbered"]
+}, Open  ]],
+Cell[29834, 952, 309, 7, 49, "Text"],
+Cell[30146, 961, 357, 10, 72, "Input"],
+Cell[30506, 973, 165, 3, 31, "Input"],
+Cell[30674, 978, 122, 2, 31, "Input"],
+Cell[30799, 982, 220, 4, 30, "Text"],
+Cell[31022, 988, 384, 10, 72, "Input"],
+Cell[31409, 1000, 95, 2, 31, "Input"],
+Cell[31507, 1004, 143, 3, 31, "Input"],
+Cell[31653, 1009, 171, 3, 30, "Text"],
+Cell[31827, 1014, 283, 8, 31, "Input"],
+Cell[32113, 1024, 147, 3, 31, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

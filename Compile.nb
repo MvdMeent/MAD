@@ -1,0 +1,1249 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     39908,       1240]
+NotebookOptionsPosition[     34062,       1056]
+NotebookOutlinePosition[     34407,       1071]
+CellTagsIndexPosition[     34364,       1068]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Compile", "Title",
+ CellChangeTimes->{{3.624689016831552*^9, 3.624689023650234*^9}}],
+
+Cell[TextData[{
+ "Compile takes an ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " expression and transforms into an expression that is optimized for \
+execution by making some assumptions."
+}], "Text",
+ CellChangeTimes->{{3.6246894146673317`*^9, 3.6246894177286377`*^9}, {
+  3.624689453665231*^9, 3.624689495849449*^9}, {3.624689540482912*^9, 
+  3.624689587348598*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Basic Operation", "Section",
+ CellChangeTimes->{{3.6246895980576687`*^9, 3.6246896063745003`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"fFun", ",", "cFun"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.624689611923055*^9, 3.624689626922555*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"fFun", "=", 
+   RowBox[{"Function", "[", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"x", ",", "n"}], "}"}], ",", "\[IndentingNewLine]", "\t", 
+     RowBox[{"Module", "[", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"sum", ",", " ", "inc"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"sum", "=", "1.0"}], ";", 
+        RowBox[{"inc", "=", "1.0"}], ";", 
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"inc", "=", 
+            RowBox[{"inc", "*", 
+             RowBox[{"x", "/", "i"}]}]}], ";", 
+           RowBox[{"sum", "=", 
+            RowBox[{"sum", "+", "inc"}]}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ";", "sum"}]}], "]"}]}], 
+    "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6246892092577925`*^9, 3.624689228569724*^9}, {
+   3.624689264755342*^9, 3.62468926713258*^9}, {3.6246893287447405`*^9, 
+   3.6246894112259874`*^9}, 3.624689537275591*^9}],
+
+Cell[BoxData[
+ RowBox[{"cFun", "=", 
+  RowBox[{"Compile", "[", " ", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"x", ",", "_Real"}], "}"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"n", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+    "\[IndentingNewLine]", 
+    RowBox[{"fFun", "[", 
+     RowBox[{"x", ",", "n"}], "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"CompilationOptions", "\[Rule]", 
+     RowBox[{"{", "\[IndentingNewLine]", 
+      RowBox[{
+      "\"\<InlineExternalDefinitions\>\"", " ", "\[Rule]", "  ", "True"}], 
+      "\[IndentingNewLine]", "}"}]}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ CellChangeTimes->{{3.6246892092577925`*^9, 3.624689228569724*^9}, {
+   3.624689264755342*^9, 3.62468926713258*^9}, {3.6246893287447405`*^9, 
+   3.6246894112259874`*^9}, 3.624689537275591*^9, {3.6246898790587664`*^9, 
+   3.624689895218382*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"fFun", "[", " ", 
+   RowBox[{"10.5", ",", 
+    SuperscriptBox["10", "5"]}], "]"}], "//", 
+  "AbsoluteTiming"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cFun", "[", " ", 
+   RowBox[{"10.5", ",", 
+    SuperscriptBox["10", "5"]}], "]"}], "//", 
+  "AbsoluteTiming"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.6246891585187197`*^9, 3.6246891587757454`*^9}, {
+  3.6246892780436707`*^9, 3.6246892804909153`*^9}, {3.62468963387225*^9, 
+  3.6246896492567883`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Syntax", "Subsection",
+ CellChangeTimes->{{3.6246910424170904`*^9, 3.624691051073956*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Compile", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"(*", 
+     RowBox[{"argument", " ", "declaration"}], "*)"}], "}"}], ",", 
+   "\[IndentingNewLine]", "Expression", ",", "\[IndentingNewLine]", 
+   "Options"}], "\[IndentingNewLine]", "]"}]], "DisplayFormula",
+ CellChangeTimes->{{3.624691059873836*^9, 3.6246911042692747`*^9}}],
+
+Cell["Argument declaration", "Text",
+ CellChangeTimes->{{3.624691183659213*^9, 3.6246912141752644`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"arg1", ",", " ", "type"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{"arg2", ",", " ", "type"}], "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"etc", "."}]}], "\[IndentingNewLine]", "}"}]], "DisplayFormula",
+ CellChangeTimes->{{3.624691216639511*^9, 3.624691250993946*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Types", "Subsubsection",
+ CellChangeTimes->{{3.624691261055952*^9, 3.6246912701618624`*^9}}],
+
+Cell["Boolean", "Item",
+ CellChangeTimes->{{3.624691277415588*^9, 3.6246912890917554`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"arg", ",", " ", 
+   RowBox[{"True", "|", "False"}]}], "}"}]], "DisplayFormula",
+ CellChangeTimes->{{3.6246913158174276`*^9, 3.624691335580404*^9}}],
+
+Cell["Integer", "Item",
+ CellChangeTimes->{{3.624691277415588*^9, 3.6246912946863146`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"arg", ",", " ", "_Integer"}], "}"}]], "DisplayFormula",
+ CellChangeTimes->{{3.6246913158174276`*^9, 3.624691364636309*^9}}],
+
+Cell["Real", "Item",
+ CellChangeTimes->{{3.624691277415588*^9, 3.6246912979426403`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"arg", ",", " ", "_Real"}], "}"}]], "DisplayFormula",
+ CellChangeTimes->{{3.6246913771105566`*^9, 3.6246913776716127`*^9}}],
+
+Cell["Complex", "Item",
+ CellChangeTimes->{{3.624691277415588*^9, 3.6246913032141676`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"arg", ",", " ", "_Complex"}], "}"}]], "DisplayFormula",
+ CellChangeTimes->{{3.6246913771105566`*^9, 3.6246913992637715`*^9}}],
+
+Cell["Tensor", "Item",
+ CellChangeTimes->{{3.624691277415588*^9, 3.624691305890435*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"arg", ",", " ", "_type", ",", " ", "rank"}], 
+  "}"}]], "DisplayFormula",
+ CellChangeTimes->{{3.6246913771105566`*^9, 3.6246913776716127`*^9}, {
+  3.6246914365444994`*^9, 3.6246914466795125`*^9}, {3.6246915192117653`*^9, 
+  3.6246915201858625`*^9}}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Parallel Computation", "Subsection",
+ CellChangeTimes->{{3.6246897498778496`*^9, 3.6246897588197436`*^9}, {
+  3.624689825398401*^9, 3.6246898263574963`*^9}}],
+
+Cell["\<\
+Compile can be used to create code that utilizes multiple cores.\
+\>", "Text",
+ CellChangeTimes->{{3.624690086577516*^9, 3.6246901186407223`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"arg", ",", "cS", ",", "cP"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.624690332023058*^9, 3.624690342401096*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"arg", "=", 
+   RowBox[{"Range", "[", " ", 
+    RowBox[{
+     RowBox[{"-", "50."}], ",", "50", ",", " ", "0.02"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cS", "=", 
+   RowBox[{"Compile", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", "x", "}"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"sum", "=", "1.0"}], ",", 
+         RowBox[{"inc", "=", "1.0"}]}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"inc", "=", 
+            RowBox[{"inc", "*", 
+             RowBox[{"x", "/", "i"}]}]}], ";", 
+           RowBox[{"sum", "=", 
+            RowBox[{"sum", "+", "inc"}]}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "10000"}], "}"}]}], "]"}], ";", "sum"}]}], "]"}],
+      ",", "\[IndentingNewLine]", 
+     RowBox[{"RuntimeAttributes", "\[Rule]", 
+      RowBox[{"{", "Listable", "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Parallelization", "\[Rule]", "False"}]}], "\[IndentingNewLine]",
+     "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cS", "[", "arg", "]"}], ";"}], "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.624690243440201*^9, 3.6246902518410406`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"cP", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", "x", "}"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Module", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"sum", "=", "1.0"}], ",", 
+         RowBox[{"inc", "=", "1.0"}]}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"inc", "=", 
+            RowBox[{"inc", "*", 
+             RowBox[{"x", "/", "i"}]}]}], ";", 
+           RowBox[{"sum", "=", 
+            RowBox[{"sum", "+", "inc"}]}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "10000"}], "}"}]}], "]"}], ";", "sum"}]}], "]"}],
+      ",", "\[IndentingNewLine]", 
+     RowBox[{"RuntimeAttributes", "\[Rule]", 
+      RowBox[{"{", "Listable", "}"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"Parallelization", "\[Rule]", "True"}]}], "\[IndentingNewLine]", 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cP", "[", "arg", "]"}], ";"}], "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.624690258184675*^9, 3.6246902610079575`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Code Generation", "Subsection",
+ CellChangeTimes->{{3.624689827323593*^9, 3.6246898339262533`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Simple expressions", "Subsubsection",
+ CellChangeTimes->{{3.6246908633991904`*^9, 3.624690873803231*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CForm", "[", 
+  RowBox[{
+   RowBox[{"x", "^", "2"}], "+", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"x", "^", "2"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.624690822834134*^9, 3.624690841201971*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FortranForm", "[", 
+  RowBox[{
+   RowBox[{"x", "^", "2"}], "+", 
+   RowBox[{"Sin", "[", 
+    RowBox[{"x", "^", "2"}], "]"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.624690822834134*^9, 3.624690841201971*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["More complicated expressions using Compile", "Subsubsection",
+ CellChangeTimes->{{3.6246908805369043`*^9, 3.6246908948923397`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "cFun", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", "x", "}"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"x", "^", "2"}], "+", 
+      RowBox[{"Sin", "[", 
+       RowBox[{"x", "^", "2"}], "]"}]}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ExportString", "[", " ", 
+  RowBox[{"cFun", ",", "\"\<C\>\""}], "]"}]}], "Input",
+ CellChangeTimes->{{3.624690524211275*^9, 3.6246905284957037`*^9}, 
+   3.6246908585037007`*^9}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Internals", "Subsection",
+ CellChangeTimes->{{3.624692434414276*^9, 3.6246924386517*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Needs", "[", "\"\<CompiledFunctionTools`\>\"", "]"}]], "Input",
+ CellChangeTimes->{{3.6246924455633907`*^9, 3.62469245885572*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "cFun", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", " ", 
+    RowBox[{
+     RowBox[{"{", "x", "}"}], ",", 
+     RowBox[{
+      SuperscriptBox["x", "2"], "+", 
+      RowBox[{"Sin", "[", 
+       SuperscriptBox["x", "2"], "]"}]}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.624692474342269*^9, 3.6246924788797226`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cFun", "]"}]], "Input",
+ CellChangeTimes->{{3.624692483396174*^9, 3.6246924913589697`*^9}}]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Limitations", "Section",
+ CellChangeTimes->{{3.6246897837932405`*^9, 3.624689790756937*^9}}],
+
+Cell["\<\
+Compile works by making some assumptions about the expression being \
+evaluated. This leads to some limitations.\
+\>", "Text",
+ CellChangeTimes->{{3.6246909504598956`*^9, 3.624691008656715*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["MachinePrecision", "Subsection",
+ CellChangeTimes->{{3.624690943389189*^9, 3.6246909463404837`*^9}, 
+   3.624691012200069*^9}],
+
+Cell["\<\
+All arguments are assummed to be machine numbers. Consequently, all \
+computations are limited to machine precision.\
+\>", "Text",
+ CellChangeTimes->{{3.6246915464574895`*^9, 3.624691552451089*^9}, {
+  3.624691653896232*^9, 3.624691697129555*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["When assumptions fail.", "Subsection",
+ CellChangeTimes->{{3.62469493240305*^9, 3.6246949458773975`*^9}}],
+
+Cell["\<\
+When assumptions fail, the compiled function falls back on the kernel.\
+\>", "Text",
+ CellChangeTimes->{{3.624694948034613*^9, 3.624694974934303*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", "cFun", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.624694979275737*^9, 3.624694985887398*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "_Real"}], "}"}], "}"}], ",", 
+     SqrtBox["x"]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.624694990891898*^9, 3.6246950060254116`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cFun", "[", "1", "]"}]], "Input",
+ CellChangeTimes->{{3.624695009139723*^9, 3.62469501251206*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cFun", "[", 
+  RowBox[{"-", "1"}], "]"}]], "Input",
+ CellChangeTimes->{3.624695019600769*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Some functions cannot be compiled", "Subsection",
+ CellChangeTimes->{{3.6246917362084627`*^9, 3.624691751802022*^9}}],
+
+Cell["\<\
+When the compiler finds a function/symbol that cannot be compiled it \
+fallsback to computation using the Mathematica kernel.\
+\>", "Text",
+ CellChangeTimes->{{3.624693373819207*^9, 3.624693431478973*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "cFun", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"cFun", "=", 
+  RowBox[{"Compile", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"a", ",", "_Real"}], "}"}], "}"}], ",", 
+    RowBox[{"NIntegrate", "[", 
+     RowBox[{
+      RowBox[{"Sin", "[", 
+       SuperscriptBox[
+        RowBox[{"Sin", "[", "x", "]"}], "a"], "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}]}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.6246932649133177`*^9, 3.6246933316769934`*^9}, {
+  3.624693444121237*^9, 3.624693444712296*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cFun", "]"}]], "Input",
+ CellChangeTimes->{{3.6246933332711525`*^9, 3.6246933425250783`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Many numerical functions (such as NIntegrate and Plot)", "Subsection",
+ CellChangeTimes->{{3.6246934780786324`*^9, 3.6246935006898932`*^9}}],
+
+Cell["\<\
+Many built in numerical functions already apply compile internally (when \
+WorkingPrecision is set to MachinePrecision). Hence, using compile on the \
+integrand of NIntegrate may not speed up the calculation.\
+\>", "Text",
+ CellChangeTimes->{{3.6246935059034147`*^9, 3.624693606397463*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", 
+  RowBox[{"f1", ",", "f2", ",", "cFun"}], "]"}]], "Input",
+ CellChangeTimes->{{3.624693858525673*^9, 3.624693872216042*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f1", "[", 
+   RowBox[{"x_", "?", "NumericQ"}], "]"}], ":=", 
+  RowBox[{"Sin", "[", 
+   RowBox[{"Sin", "[", "x", "]"}], "]"}]}]], "Input",
+ CellChangeTimes->{{3.624693768707692*^9, 3.624693832822103*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "_Real"}], "}"}], "}"}], ",", 
+     RowBox[{"Sin", "[", 
+      RowBox[{"Sin", "[", "x", "]"}], "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"f2", "[", 
+    RowBox[{"x_", "?", "NumericQ"}], "]"}], ":=", 
+   RowBox[{"cFun", "[", "x", "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6246936116919923`*^9, 3.6246936518390064`*^9}, {
+  3.6246937059144135`*^9, 3.624693724521274*^9}, {3.6246938169425154`*^9, 
+  3.624693839111732*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Do", "[", 
+   RowBox[{
+    RowBox[{"NIntegrate", "[", 
+     RowBox[{
+      RowBox[{"f1", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", "100", "}"}]}], "]"}], "//", 
+  "AbsoluteTiming"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"Do", "[", 
+   RowBox[{
+    RowBox[{"NIntegrate", "[", 
+     RowBox[{
+      RowBox[{"f2", "[", "x", "]"}], ",", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "0", ",", "1"}], "}"}]}], "]"}], ",", 
+    RowBox[{"{", "100", "}"}]}], "]"}], "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.624693658261649*^9, 3.6246937306678886`*^9}, 
+   3.6246937924940705`*^9, {3.6246938436311836`*^9, 3.624693843942215*^9}}]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Options", "Section",
+ CellChangeTimes->{{3.624690268961753*^9, 3.624690274374294*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["RuntimeAttributes", "Subsection",
+ CellChangeTimes->{{3.6246902853703933`*^9, 3.6246902912229786`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Listable", "Subsubsection",
+ CellChangeTimes->{{3.624692058372676*^9, 3.624692063366175*^9}}],
+
+Cell["\<\
+Allows a function to automatically thread over a list appearing in its input.\
+\>", "Text",
+ CellChangeTimes->{{3.6246921218570237`*^9, 3.624692149056743*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", "cListable", "]"}]], "Input",
+ CellChangeTimes->{{3.6246921525190897`*^9, 3.6246921623220696`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cListable", "=", 
+  RowBox[{"Compile", "[", 
+   RowBox[{
+    RowBox[{"{", "x", "}"}], ",", 
+    RowBox[{"x", "^", "2"}], ",", 
+    RowBox[{"RuntimeAttributes", "\[Rule]", 
+     RowBox[{"{", "Listable", "}"}]}]}], "]"}]}]], "Input",
+ CellID->162943859],
+
+Cell[BoxData[{
+ RowBox[{"cListable", "[", "5", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"cListable", "[", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"-", "5"}], ",", "0", ",", "5"}], "}"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{"cListable", "[", " ", 
+  RowBox[{"{", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"-", "5"}], ",", "10", ",", "20"}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"5", ",", "1", ",", "2"}], "}"}]}], "}"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.6246921171285505`*^9, 3.624692117673605*^9}, {
+  3.624692172587096*^9, 3.6246921766435013`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Compilation Options", "Subsection",
+ CellChangeTimes->{{3.6246896840682693`*^9, 3.6246896976896315`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["InlineCompiledFunctions", "Subsubsection",
+ CellChangeTimes->{{3.6246897044063025`*^9, 3.624689720257888*^9}}],
+
+Cell[BoxData[
+ RowBox[{"Clear", "[", 
+  RowBox[{"cf", ",", "cf1", ",", "cf2"}], "]"}]], "Input",
+ CellChangeTimes->{{3.6246931468835163`*^9, 3.624693152042032*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cf", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", "x", "}"}], "}"}], ",", 
+     RowBox[{"Sin", "[", "x", "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.624692869483779*^9, 3.6246928705398846`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"cf1", "=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"cf", "=", "cf"}], "}"}], ",", 
+     RowBox[{"Compile", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"{", "x", "}"}], "}"}], ",", 
+       SuperscriptBox[
+        RowBox[{"cf", "[", "x", "]"}], "2"], ",", "\[IndentingNewLine]", 
+       RowBox[{"CompilationOptions", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<InlineCompiledFunctions\>\"", "\[Rule]", "False"}], 
+         "}"}]}]}], "\[IndentingNewLine]", "]"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cf2", "=", 
+   RowBox[{"With", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"cf", "=", "cf"}], "}"}], ",", 
+     RowBox[{"Compile", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"{", "x", "}"}], "}"}], ",", 
+       SuperscriptBox[
+        RowBox[{"cf", "[", "x", "]"}], "2"], ",", "\[IndentingNewLine]", 
+       RowBox[{"CompilationOptions", "\[Rule]", 
+        RowBox[{"{", 
+         RowBox[{"\"\<InlineCompiledFunctions\>\"", "\[Rule]", "True"}], 
+         "}"}]}]}], "\[IndentingNewLine]", "]"}]}], "]"}]}], ";"}]}], "Input",
+ CellChangeTimes->{{3.6246928761314435`*^9, 3.624692891315962*^9}, {
+  3.624692933151145*^9, 3.6246929831811476`*^9}, {3.62469304481231*^9, 
+  3.624693069044733*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cf1", "]"}]], "Input",
+ CellChangeTimes->{{3.62469294250208*^9, 3.624692948910721*^9}, 
+   3.6246929904078703`*^9}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cf2", "]"}]], "Input",
+ CellChangeTimes->{3.6246929982566547`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["InlineExternalDefinitions", "Subsubsection",
+ CellChangeTimes->{{3.6246897222470865`*^9, 3.6246897298668485`*^9}}],
+
+Cell["\<\
+By default, Compile will call the main kernel for any unknown \
+symbols/functions it encounters.\
+\>", "Text",
+ CellChangeTimes->{{3.624693922250045*^9, 3.6246939897627954`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"val", "=", 
+   RowBox[{"Floor", "[", "x", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"cf", "=", 
+  RowBox[{"Compile", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "_Real"}], "}"}], "}"}], ",", "val"}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.624693174148242*^9, 3.6246931861374407`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cf", "]"}]], "Input",
+ CellChangeTimes->{{3.624693191349962*^9, 3.624693196021429*^9}}],
+
+Cell[TextData[{
+ StyleBox["CompilationOptions -> {\"InlineExternalDefinitions\" -> True}", 
+  "InlineFormula"],
+ " can be used to force compile to iteratively include the definitions of any \
+symbols it may encounter (if possible)."
+}], "Text",
+ CellChangeTimes->{{3.6246940663024487`*^9, 3.6246941303758554`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cf", "=", 
+   RowBox[{"Compile", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "_Real"}], "}"}], "}"}], ",", "\[IndentingNewLine]", 
+     "val", ",", "\[IndentingNewLine]", 
+     RowBox[{"CompilationOptions", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<InlineExternalDefinitions\>\"", "\[Rule]", "True"}], 
+       "}"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.624694186715489*^9, 3.6246942893117476`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cf", "]"}]], "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Debugging", "Section",
+ CellChangeTimes->{{3.624689764951357*^9, 3.6246897692917905`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Unknown functions", "Subsection",
+ CellChangeTimes->{{3.6246944578175964`*^9, 3.6246944660754223`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", "cFun", "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.624694414977313*^9, 3.6246944226990848`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", "x", "}"}], "}"}], ",", 
+     RowBox[{"fFunUnknown", "[", 
+      RowBox[{"Sin", "[", "x", "]"}], "]"}]}], "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.6246944113949547`*^9, 3.6246944136591806`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cFun", "[", "1.1", "]"}]], "Input",
+ CellChangeTimes->{{3.624694425582373*^9, 3.6246944305148664`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cFun", "]"}]], "Input",
+ CellChangeTimes->{{3.624694436213436*^9, 3.6246944424490595`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["External call type mismatch", "Subsection",
+ CellChangeTimes->{{3.6246946314679594`*^9, 3.6246946392897415`*^9}, {
+  3.6246950977565837`*^9, 3.62469510272208*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Clear", "[", 
+   RowBox[{"f", ",", "cFun"}], "]"}], ";"}]], "Input",
+ CellChangeTimes->{{3.6246946074145546`*^9, 3.6246946497077837`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"f", "[", "x_", "]"}], ":=", 
+  RowBox[{"\[ImaginaryI]", " ", 
+   RowBox[{"Floor", "[", "x", "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.6246945046722813`*^9, 3.624694522271041*^9}, {
+  3.6246947081416264`*^9, 3.624694709229735*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "_Real"}], "}"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"x", "+", 
+      RowBox[{"f", "[", "x", "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"CompilationOptions", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<InlineExternalDefinitions\>\"", "\[Rule]", "False"}], 
+       "}"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.624694526633477*^9, 3.624694624651278*^9}, {
+  3.62469467027684*^9, 3.6246946705088634`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cFun", "[", "10.1", "]"}]], "Input",
+ CellChangeTimes->{{3.6246945946172748`*^9, 3.6246945988657*^9}, 
+   3.624694680996912*^9}],
+
+Cell[BoxData[
+ RowBox[{"CompilePrint", "[", "cFun", "]"}]], "Input",
+ CellChangeTimes->{{3.624694722347047*^9, 3.6246947288556976`*^9}}],
+
+Cell[TextData[{
+ StyleBox["Solution :",
+  FontWeight->"Bold"],
+ " Compile has  a third optional argument that allows you to set assumptions \
+for the compiler."
+}], "Text",
+ CellChangeTimes->{{3.6246948437421846`*^9, 3.624694892459056*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"x", ",", "_Real"}], "}"}], "}"}], ",", "\[IndentingNewLine]", 
+     RowBox[{"x", "+", 
+      RowBox[{"f", "[", "x", "]"}]}], ",", "\[IndentingNewLine]", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"f", "[", "_", "]"}], ",", "_Complex"}], "}"}], "}"}], ",", 
+     "\[IndentingNewLine]", 
+     RowBox[{"CompilationOptions", "\[Rule]", 
+      RowBox[{"{", 
+       RowBox[{"\"\<InlineExternalDefinitions\>\"", "\[Rule]", "False"}], 
+       "}"}]}]}], "\[IndentingNewLine]", "]"}]}], ";"}]], "Input",
+ CellChangeTimes->{{3.624694526633477*^9, 3.624694624651278*^9}, {
+  3.62469467027684*^9, 3.6246946705088634`*^9}, {3.624694797897601*^9, 
+  3.62469483558737*^9}}],
+
+Cell[BoxData[
+ RowBox[{"cFun", "[", "10.1", "]"}]], "Input",
+ CellChangeTimes->{{3.6246945946172748`*^9, 3.6246945988657*^9}, 
+   3.624694680996912*^9}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["CompilationTarget", "Section",
+ CellChangeTimes->{{3.624695310726879*^9, 3.624695317898596*^9}}],
+
+Cell[TextData[{
+ "By Default, Compile outputs code for the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " Virtual Machine \[OpenCurlyDoubleQuote]MVM\[CloseCurlyDoubleQuote]. This \
+compilation is very fast."
+}], "Text",
+ CellChangeTimes->{{3.624695645632366*^9, 3.6246957256803703`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "cFun", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cFun", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"{", "x", "}"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"x", "^", "2"}], "+", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"x", "^", "2"}], "]"}]}], ",", " ", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<MVM\>\""}]}], "]"}]}], 
+   ";"}], "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.624695303259132*^9, 3.6246953038831944`*^9}}],
+
+Cell["\<\
+Alternatively, Compile can be asked to produce and compile C code (using an \
+external C compiler). This compilation is much slower (because an external \
+compiler has to be called).\
+\>", "Text",
+ CellChangeTimes->{{3.624695645632366*^9, 3.6246957256803703`*^9}, {
+  3.6246957558903904`*^9, 3.6246958332761283`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Clear", "[", "cFunC", "]"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"cFunC", "=", 
+    RowBox[{"Compile", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"{", "x", "}"}], "}"}], ",", 
+      RowBox[{
+       RowBox[{"x", "^", "2"}], "+", 
+       RowBox[{"Sin", "[", 
+        RowBox[{"x", "^", "2"}], "]"}]}], ",", " ", 
+      RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], "]"}]}], ";"}],
+   "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.6246951754023476`*^9, 3.624695217216529*^9}, {
+   3.624695270377844*^9, 3.624695289799786*^9}, 3.624695362286034*^9, 
+   3.6246957374595475`*^9}],
+
+Cell["\<\
+However, C compiled code can be much faster than normal MVM compiled code.\
+\>", "Text",
+ CellChangeTimes->{{3.624695843503151*^9, 3.624695888518652*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"cFunC", "=", 
+   RowBox[{"Compile", "[", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "_Real"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", "\t", 
+     RowBox[{"Module", "[", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"sum", ",", " ", "inc"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"sum", "=", "1.0"}], ";", 
+        RowBox[{"inc", "=", "1.0"}], ";", 
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"inc", "=", 
+            RowBox[{"inc", "*", 
+             RowBox[{"x", "/", "i"}]}]}], ";", 
+           RowBox[{"sum", "=", 
+            RowBox[{"sum", "+", "inc"}]}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ";", "sum"}]}], "]"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"CompilationTarget", "\[Rule]", "\"\<C\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cFunC", "[", 
+   RowBox[{"1.5", ",", " ", 
+    SuperscriptBox["10", "7"]}], "]"}], "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.6246954195747623`*^9, 3.624695435633368*^9}, {
+  3.6246954679716015`*^9, 3.6246954696507697`*^9}, {3.6246956185766606`*^9, 
+  3.6246956189596987`*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"cFun", "=", 
+   RowBox[{"Compile", "[", " ", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"x", ",", "_Real"}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"n", ",", "_Integer"}], "}"}]}], "}"}], ",", 
+     "\[IndentingNewLine]", "\t", 
+     RowBox[{"Module", "[", " ", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"sum", ",", " ", "inc"}], "}"}], ",", 
+       RowBox[{
+        RowBox[{"sum", "=", "1.0"}], ";", 
+        RowBox[{"inc", "=", "1.0"}], ";", 
+        RowBox[{"Do", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"inc", "=", 
+            RowBox[{"inc", "*", 
+             RowBox[{"x", "/", "i"}]}]}], ";", 
+           RowBox[{"sum", "=", 
+            RowBox[{"sum", "+", "inc"}]}]}], ",", 
+          RowBox[{"{", 
+           RowBox[{"i", ",", "n"}], "}"}]}], "]"}], ";", "sum"}]}], "]"}], 
+     ",", "\[IndentingNewLine]", 
+     RowBox[{"CompilationTarget", "\[Rule]", "\"\<MVM\>\""}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"cFun", "[", 
+   RowBox[{"1.5", ",", " ", 
+    SuperscriptBox["10", "7"]}], "]"}], "//", "AbsoluteTiming"}]}], "Input",
+ CellChangeTimes->{{3.624695452802085*^9, 3.6246954787626805`*^9}, {
+  3.62469560356816*^9, 3.6246956138881917`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Future Topics", "Section",
+ CellChangeTimes->{{3.6246959483996396`*^9, 3.624695959360736*^9}}],
+
+Cell["(need volunteers)", "Text",
+ CellChangeTimes->{{3.6246960489356923`*^9, 3.624696059492748*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["xTensor", "Item",
+ CellChangeTimes->{{3.6246960621200104`*^9, 3.6246960805838566`*^9}}],
+
+Cell["Built \[OpenCurlyDoubleQuote]Tensor\[CloseCurlyDoubleQuote] functions \
+9.0+", "Item",
+ CellChangeTimes->{{3.6246960621200104`*^9, 3.6246961101688147`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["TensorProduct", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.6246963954243374`*^9}}],
+
+Cell["TensorContract", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.624696398959691*^9}}],
+
+Cell["TensorTranspose", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.6246964116569605`*^9}}],
+
+Cell["TensorWedge", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.62469640435223*^9}}],
+
+Cell["HodgeDual", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.624696405177313*^9}}],
+
+Cell["Symmetrize", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.624696406024398*^9}}],
+
+Cell["SymmetrizedArray", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.624696406728468*^9}}],
+
+Cell["TensorReduce", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.624696407496545*^9}}],
+
+Cell["TensorExpand", "Subitem",
+ CellChangeTimes->{{3.624696190312828*^9, 3.6246962305288496`*^9}, {
+  3.624696274357232*^9, 3.624696407496545*^9}}]
+}, Open  ]],
+
+Cell["FEM NDSolve", "Item",
+ CellChangeTimes->{{3.6246960621200104`*^9, 3.6246961126950674`*^9}, {
+  3.6246964265294476`*^9, 3.624696432186013*^9}, {3.624696742493041*^9, 
+  3.6246967424960413`*^9}}],
+
+Cell["Graphics and Graphics3D", "Item",
+ CellChangeTimes->{{3.6246960621200104`*^9, 3.6246961126950674`*^9}, {
+  3.6246964265294476`*^9, 3.624696432186013*^9}, {3.624696742493041*^9, 
+  3.624696758855677*^9}}],
+
+Cell["Other stuff?", "Item",
+ CellChangeTimes->{{3.6246960621200104`*^9, 3.6246961126950674`*^9}, {
+  3.6246964265294476`*^9, 3.624696432186013*^9}, {3.624696742493041*^9, 
+  3.624696767973589*^9}}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1127, 801},
+WindowMargins->{{24, Automatic}, {Automatic, 30}},
+FrontEndVersion->"9.0 for Microsoft Windows (64-bit) (January 25, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 90, 1, 101, "Title"],
+Cell[672, 25, 377, 9, 30, "Text"],
+Cell[CellGroupData[{
+Cell[1074, 38, 104, 1, 86, "Section"],
+Cell[1181, 41, 172, 4, 31, "Input"],
+Cell[1356, 47, 999, 27, 52, "Input"],
+Cell[2358, 76, 915, 22, 152, "Input"],
+Cell[3276, 100, 511, 13, 76, "Input"],
+Cell[CellGroupData[{
+Cell[3812, 117, 96, 1, 49, "Subsection"],
+Cell[3911, 120, 379, 8, 114, "DisplayFormula"],
+Cell[4293, 130, 104, 1, 30, "Text"],
+Cell[4400, 133, 390, 8, 114, "DisplayFormula"],
+Cell[CellGroupData[{
+Cell[4815, 145, 98, 1, 39, "Subsubsection"],
+Cell[4916, 148, 91, 1, 29, "Item"],
+Cell[5010, 151, 187, 4, 27, "DisplayFormula"],
+Cell[5200, 157, 91, 1, 29, "Item"],
+Cell[5294, 160, 163, 3, 25, "DisplayFormula"],
+Cell[5460, 165, 88, 1, 29, "Item"],
+Cell[5551, 168, 162, 3, 25, "DisplayFormula"],
+Cell[5716, 173, 91, 1, 29, "Item"],
+Cell[5810, 176, 165, 3, 25, "DisplayFormula"],
+Cell[5978, 181, 88, 1, 29, "Item"],
+Cell[6069, 184, 289, 6, 25, "DisplayFormula"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[6407, 196, 163, 2, 41, "Subsection"],
+Cell[6573, 200, 156, 3, 30, "Text"],
+Cell[6732, 205, 180, 4, 31, "Input"],
+Cell[6915, 211, 1376, 38, 172, "Input"],
+Cell[8294, 251, 1174, 32, 132, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[9505, 288, 105, 1, 41, "Subsection"],
+Cell[CellGroupData[{
+Cell[9635, 293, 111, 1, 39, "Subsubsection"],
+Cell[9749, 296, 227, 6, 31, "Input"],
+Cell[9979, 304, 233, 6, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10249, 315, 137, 1, 39, "Subsubsection"],
+Cell[10389, 318, 567, 17, 72, "Input"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11005, 341, 95, 1, 41, "Subsection"],
+Cell[11103, 344, 154, 2, 31, "Input"],
+Cell[11260, 348, 428, 12, 54, "Input"],
+Cell[11691, 362, 136, 2, 31, "Input"]
+}, Closed]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[11876, 370, 98, 1, 56, "Section"],
+Cell[11977, 373, 204, 4, 30, "Text"],
+Cell[CellGroupData[{
+Cell[12206, 381, 132, 2, 49, "Subsection"],
+Cell[12341, 385, 257, 5, 30, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12635, 395, 111, 1, 49, "Subsection"],
+Cell[12749, 398, 160, 3, 30, "Text"],
+Cell[12912, 403, 145, 3, 31, "Input"],
+Cell[13060, 408, 298, 9, 39, "Input"],
+Cell[13361, 419, 122, 2, 31, "Input"],
+Cell[13486, 423, 117, 3, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[13640, 431, 123, 1, 49, "Subsection"],
+Cell[13766, 434, 215, 4, 30, "Text"],
+Cell[13984, 440, 622, 17, 54, "Input"],
+Cell[14609, 459, 138, 2, 31, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[14784, 466, 146, 1, 41, "Subsection"],
+Cell[14933, 469, 300, 5, 49, "Text"],
+Cell[15236, 476, 162, 3, 31, "Input"],
+Cell[15401, 481, 238, 6, 31, "Input"],
+Cell[15642, 489, 623, 18, 52, "Input"],
+Cell[16268, 509, 762, 21, 52, "Input"]
+}, Closed]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[17079, 536, 92, 1, 56, "Section"],
+Cell[CellGroupData[{
+Cell[17196, 541, 109, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[17330, 546, 99, 1, 39, "Subsubsection"],
+Cell[17432, 549, 169, 3, 30, "Text"],
+Cell[17604, 554, 136, 2, 31, "Input"],
+Cell[17743, 558, 275, 8, 31, "Input",
+ CellID->162943859],
+Cell[18021, 568, 592, 16, 72, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[18662, 590, 111, 1, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[18798, 595, 116, 1, 39, "Subsubsection"],
+Cell[18917, 598, 164, 3, 31, "Input"],
+Cell[19084, 603, 282, 8, 31, "Input"],
+Cell[19369, 613, 1336, 36, 141, "Input"],
+Cell[20708, 651, 160, 3, 31, "Input"],
+Cell[20871, 656, 111, 2, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21019, 663, 120, 1, 39, "Subsubsection"],
+Cell[21142, 666, 188, 4, 30, "Text"],
+Cell[21333, 672, 369, 11, 52, "Input"],
+Cell[21705, 685, 132, 2, 31, "Input"],
+Cell[21840, 689, 314, 6, 49, "Text"],
+Cell[22157, 697, 544, 13, 112, "Input"],
+Cell[22704, 712, 66, 1, 31, "Input"]
+}, Open  ]]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[22831, 720, 96, 1, 56, "Section"],
+Cell[CellGroupData[{
+Cell[22952, 725, 109, 1, 49, "Subsection"],
+Cell[23064, 728, 147, 3, 31, "Input"],
+Cell[23214, 733, 333, 9, 31, "Input"],
+Cell[23550, 744, 127, 2, 31, "Input"],
+Cell[23680, 748, 136, 2, 31, "Input"]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[23853, 755, 169, 2, 41, "Subsection"],
+Cell[24025, 759, 173, 4, 31, "Input"],
+Cell[24201, 765, 266, 6, 31, "Input"],
+Cell[24470, 773, 622, 15, 92, "Input"],
+Cell[25095, 790, 152, 3, 31, "Input"],
+Cell[25250, 795, 136, 2, 31, "Input"],
+Cell[25389, 799, 240, 6, 30, "Text"],
+Cell[25632, 807, 831, 21, 112, "Input"],
+Cell[26466, 830, 152, 3, 31, "Input"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[26667, 839, 102, 1, 56, "Section"],
+Cell[26772, 842, 295, 7, 30, "Text"],
+Cell[27070, 851, 572, 16, 52, "Input"],
+Cell[27645, 869, 327, 6, 49, "Text"],
+Cell[27975, 877, 671, 18, 52, "Input"],
+Cell[28649, 897, 164, 3, 30, "Text"],
+Cell[28816, 902, 1360, 38, 94, "Input"],
+Cell[30179, 942, 1304, 37, 94, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[31520, 984, 100, 1, 86, "Section"],
+Cell[31623, 987, 101, 1, 30, "Text"],
+Cell[CellGroupData[{
+Cell[31749, 992, 93, 1, 29, "Item"],
+Cell[31845, 995, 162, 2, 29, "Item"],
+Cell[CellGroupData[{
+Cell[32032, 1001, 151, 2, 25, "Subitem"],
+Cell[32186, 1005, 150, 2, 25, "Subitem"],
+Cell[32339, 1009, 153, 2, 25, "Subitem"],
+Cell[32495, 1013, 146, 2, 25, "Subitem"],
+Cell[32644, 1017, 145, 2, 25, "Subitem"],
+Cell[32792, 1021, 146, 2, 25, "Subitem"],
+Cell[32941, 1025, 152, 2, 25, "Subitem"],
+Cell[33096, 1029, 148, 2, 25, "Subitem"],
+Cell[33247, 1033, 148, 2, 25, "Subitem"]
+}, Open  ]],
+Cell[33410, 1038, 199, 3, 29, "Item"],
+Cell[33612, 1043, 209, 3, 29, "Item"],
+Cell[33824, 1048, 198, 3, 29, "Item"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
